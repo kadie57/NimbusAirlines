@@ -1,0 +1,9 @@
+@use "sass:map";
+@import "pages/all";
+* {
+  margin: 0;
+  font-family: map.get($theme-fonts, "main");
+}
+body {
+  background-color: aliceblue;
+}

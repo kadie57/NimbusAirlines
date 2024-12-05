@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+}
+
+.content {
+  flex: 1; /* Đẩy footer xuống nếu nội dung ít */
+}
+
+.footer {
+  background-color: #003875;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  // font-family: "Montserrat Alternates", Helvetica;
+}
+.footer .social-icons {
+  margin: 20px 0;
+}
+.footer .social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 20px;
+}
+.footer .social-icons a:hover {
+  color: #ddd;
+}
+.footer .footer-links {
+  margin: 20px 0;
+}
+.footer .footer-links a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+}
+.footer .footer-links a:hover {
+  text-decoration: underline;
+}
+.footer p {
+  margin: 10px 0 0;
+}
