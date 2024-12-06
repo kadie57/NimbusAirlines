@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import "./style.scss";
+import "./stylehead.scss";
 import { Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();

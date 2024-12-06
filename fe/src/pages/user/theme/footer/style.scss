@@ -1,7 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
   bottom: 0;
+  width: 100%;
 }
 
 .content {
@@ -9,7 +11,7 @@
 }
 
 .footer {
-  background-color: #003875;
+  background-color: #295F98;
   color: #fff;
   padding: 20px 0;
   text-align: center;

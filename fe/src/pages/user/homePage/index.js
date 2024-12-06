@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "./style.scss";
+// import "./style.scss";
 const HomePage = () => {
   return (
     <>

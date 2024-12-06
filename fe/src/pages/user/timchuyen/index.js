@@ -1,13 +1,10 @@
-import { memo } from "react";
-import "./style.scss";
-import Headermini from "../theme/thongtin";
-const timchuyen = () => {
-  return (
-    <>
-      <Headermini />
-      <h1>timchuyen</h1>
-    </>
-  );
-};
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-export default memo(timchuyen);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

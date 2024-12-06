@@ -1,0 +1,92 @@
+[
+  {
+    "flightNumber": "AA123",
+    "departure": "New York",
+    "destination": "Los Angeles",
+    "departureDate": "2024-10-15",
+    "returnDate": null,
+    "class": "Phổ thông",
+    "price": 399.99
+  },
+  {
+    "flightNumber": "AC123",
+    "departure": "New York",
+    "destination": "Los Angeles",
+    "departureDate": "2024-10-15",
+    "returnDate": null,
+    "class": "Phổ thông",
+    "price": 299.99
+  },
+  {
+    "flightNumber": "AB123",
+    "departure": "New York",
+    "destination": "Los Angeles",
+    "departureDate": "2024-10-15",
+    "returnDate": null,
+    "class": "Thương gia",
+    "price": 299.99
+  },
+  {
+    "flightNumber": "DL456",
+    "departure": "Chicago",
+    "destination": "Miami",
+    "departureDate": "2024-10-20",
+    "returnDate": null,
+    "class": "Thương gia",
+    "price": 499.99
+  },
+  {
+    "flightNumber": "UA789",
+    "departure": "San Francisco",
+    "destination": "Seattle",
+    "departureDate": "2024-10-22",
+    "returnDate": null,
+    "class": "Nhất",
+    "price": 399.99
+  },
+  {
+    "flightNumber": "SW101",
+    "departure": "Los Angeles",
+    "destination": "New York",
+    "departureDate": "2024-10-25",
+    "returnDate": null,
+    "class": "Phổ thông",
+    "price": 279.99
+  },
+  {
+    "flightNumber": "AA124",
+    "departure": "New York",
+    "destination": "Los Angeles",
+    "departureDate": "2024-10-15",
+    "returnDate": "2024-10-22",
+    "class": "Phổ thông",
+    "price": 599.99
+  },
+  {
+    "flightNumber": "DL457",
+    "departure": "Chicago",
+    "destination": "Miami",
+    "departureDate": "2024-10-20",
+    "returnDate": "2024-10-27",
+    "class": "Thương gia",
+    "price": 799.99
+  },
+  {
+    "flightNumber": "UA790",
+    "departure": "San Francisco",
+    "destination": "Seattle",
+    "departureDate": "2024-10-22",
+    "returnDate": "2024-10-29",
+    "class": "Nhất",
+    "price": 699.99
+  },
+  {
+    "flightNumber": "SW102",
+    "departure": "Los Angeles",
+    "destination": "New York",
+    "departureDate": "2024-10-25",
+    "returnDate": "2024-11-01",
+    "class": "Phổ thông",
+    "price": 559.99
+  }
+]

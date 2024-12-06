@@ -10,7 +10,7 @@ import Tructiep from "./pages/user/thutuc/tructiep";
 import Tructuyen from "./pages/user/thutuc/tructuyen";
 import Baynoidia from "./pages/user/camnangbay/baynoidia";
 import Baynuocngoai from "./pages/user/camnangbay/baynuocngoai";
-import Timchuyen from "./pages/user/timchuyen";
+import Timchuyen from "./pages/user/timchuyen/App";
 import Datve from "./pages/user/datve";
 import Dangnhap from "./pages/user/dangnhap";
 const renderUserRouter = () => {
