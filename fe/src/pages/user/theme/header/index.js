@@ -11,7 +11,9 @@ const Header = () => {
   return (
     <>
       <div class="navbar">
-        <img src="img/Nimbus.png" alt="logo 'QAirlines'" />
+        <a href="/" className="logo">
+          <img src="img/Nimbus.png" alt="logo 'QAirlines'" />
+        </a>
         <div class="nav-links">
           <div class="has-dropdown">
             <a href="#">Thông tin hành trình</a>
@@ -46,6 +48,7 @@ const Header = () => {
           </div>
           <a href="tim-chuyen">Tìm chuyến</a>
           <a href="dat-ve">Đặt vé</a>
+          <a href="dat-ve">Tin tức</a>
           <div class="has-dropdown">
             <a href="#">Tài khoản</a>
             <div
@@ -64,7 +67,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isHome && <img className="banner" src="img/banner.png" alt="banner" />}
+      {isHome && <img className="banner" src="img/homepage.jpg" alt="banner" />}
     </>
   );
 };

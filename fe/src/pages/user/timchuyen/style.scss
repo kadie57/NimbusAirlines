@@ -9,11 +9,11 @@
 }
 .container {
   display: flex;
-  gap: 50px;
+  gap: 20px;
   margin-top: 20px;
 }
 
-.banner {
+.banner-tim-chuyen {
   position: relative;
   width: 100%;
   height: 400px;
@@ -100,7 +100,7 @@ button:hover {
 }
 .results {
   margin-top: 20px;
-  width: 100%;
+  width: 1185px;
   // margin-right: 600px;
   // display: block; /* Change to block to show results initially */
   flex-direction: column;
@@ -147,7 +147,7 @@ button:hover {
   background-color: white; /* Background color */
   border: 1px solid #4596d5; /* Border style */
   float: right;
-  margin-right: 50px;
+  margin-right: 20px;
   margin-top: 0;
 
   display: flex; /* Enable Flexbox */
@@ -173,7 +173,7 @@ button:hover {
   width: 100px;
   float: right;
   position: relative;
-  top: -14px;
+  top: 0px;
 }
 .sortButton {
   width: 80px;

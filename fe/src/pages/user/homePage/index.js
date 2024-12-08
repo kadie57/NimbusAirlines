@@ -1,10 +1,10 @@
 import { memo } from "react";
-// import "./style.scss";
+import "./stylehome.scss";
 const HomePage = () => {
   return (
-    <>
+    <div className="homepage">
       <h1> Trang chủ</h1>
-    </>
+    </div>
   );
 };
 

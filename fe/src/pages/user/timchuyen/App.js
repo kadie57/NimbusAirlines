@@ -7,7 +7,7 @@ import "./style.scss";
 function App() {
   return (
     <>
-      <div className="banner">
+      <div className="banner-tim-chuyen">
         <h1>TÌM CHUYẾN BAY </h1>
       </div>
       <div className="App">
