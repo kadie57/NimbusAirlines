@@ -1,0 +1,87 @@
+/* Layout Styles */
+.content {
+  max-width: 1000px;
+  margin: 10px auto;
+  font-family: "Montserrat Alternates", Helvetica, sans-serif;
+  color: black;
+}
+
+/* Banner Styles */
+.luggage-banner-wrapper {
+  margin-bottom: 20px;
+}
+
+.luggage-banner {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.TitlePage {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: black;
+}
+
+/* Section Wrappers */
+.frame-1,
+.frame-2,
+.frame-3,
+.frame-4,
+.frame-5 {
+  background-color: #d9f6ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography */
+.content p {
+  font-size: 16px;
+  color: var(--text-color);
+  text-align: justify;
+  line-height: 1.625;
+}
+
+.text-wrapper {
+  font-weight: bold;
+  color: #295f98;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+/* Responsive Considerations */
+@media (max-width: 1200px) {
+  .content {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+}
+
+.heading-strong {
+  margin-top: 30px;
+  font-weight: 700;
+  font-size: 25px; /* Cỡ chữ tiêu đề */
+  color: #295f98; /* Màu chữ tiêu đề */
+  margin-bottom: 5px; /* Khoảng cách giữa tiêu đề và khối nội dung */
+}
+
+nav {
+  margin-top: 50px;
+  font-size: 16px; /* Cỡ chữ tiêu đề */ /* Màu chữ tiêu đề */
+  margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và khối nội dung */
+}
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
+nav a {
+  color: #295f98; /* Màu chữ tiêu đề */
+}

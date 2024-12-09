@@ -187,7 +187,7 @@ function FlightResults({ flights, isSearchPerformed, isLoading }) {
       return acc;
     }, {});
     setTicketQuantities(initialQuantities);
-  }, [flights]);
+  }, [flights]);  
 
   const sortedFlights = [...flights].sort((a, b) => {
     return sortOrder === "asc" ? a.price - b.price : b.price - a.price;

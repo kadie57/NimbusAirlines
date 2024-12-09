@@ -253,7 +253,11 @@ function FlightSearch() {
   };
 
   if (isLoading) {
-    return <div>Đang tải dữ liệu chuyến bay...</div>;
+    return (
+      <div className="loading-container" style={{ width: "1205px" }}>
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   if (error) {

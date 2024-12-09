@@ -12,5 +12,6 @@ export const ROUTERS = {
     TIMCHUYEN:"tim-chuyen",
     DATVE:"dat-ve",
     DANGNHAP:"dang-nhap",
+    TINTUC:"tin-tuc",
   },
 };
