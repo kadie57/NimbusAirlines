@@ -7,15 +7,15 @@
 //   margin: 0;
 //   font-family: Arial, sans-serif;
 // }
-// .background {
-//   position: absolute;
-//   inset: 0;
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-//   opacity: 0.5;
-// }
-.login-container {
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+.container-register {
   position: relative;
   background: rgba(255, 255, 255, 0.436);
   backdrop-filter: blur(10px);
@@ -44,19 +44,19 @@ h2 {
   //   font-size: 1.5rem;
   //   margin-bottom: 1.5rem;
 }
-.login-form {
+.register-form {
   margin-top: 15px;
 }
-.login-form label {
+.register-form label {
   color: #295f98;
   margin-bottom: 0.5rem;
   display: block;
 }
-.login-form .input-group {
+.register-form .input-group {
   position: relative;
   margin-bottom: 1rem;
 }
-.login-form .input-group input {
+.register-form .input-group input {
   width: 100%;
   //   padding: 0.5rem 1rem;
   background: transparent;
@@ -66,23 +66,23 @@ h2 {
   outline: none;
   font-size: 14px;
 }
-.login-form .input-group i {
+.register-form .input-group i {
   position: absolute;
   right: 2px;
   top: 40%;
   //   transform: translateY(-50%);
   color: #295f98;
 }
-.login-form .checkbox-group {
+.register-form .checkbox-group {
   display: flex;
   align-items: center;
   color: #295f98;
   margin-bottom: 1.5rem;
 }
-.login-form .checkbox-group input {
+.register-form .checkbox-group input {
   margin-right: 0.5rem;
 }
-.login-form .login-btn {
+.register-form .register-btn {
   width: 100%;
   background-color: #1e40af;
   color: #ffffff;

@@ -63,6 +63,7 @@ const Header = () => {
               }}
             >
               <a href="dang-nhap">Đăng nhập</a>
+              <a href="dang-ky">Đăng ký</a>
             </div>
           </div>
         </div>

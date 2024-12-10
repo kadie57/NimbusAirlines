@@ -14,6 +14,7 @@ import Timchuyen from "./pages/user/timchuyen/App";
 import Datve from "./pages/user/datve";
 import Dangnhap from "./pages/user/dangnhap";
 import TinTuc from "./pages/user/tintuc";
+import DangKy from "./pages/user/dangky";
 const renderUserRouter = () => {
   const userRouters = [
     {
@@ -67,6 +68,10 @@ const renderUserRouter = () => {
     {
       path: ROUTERS.USER.TINTUC,
       component: <TinTuc />,
+    },
+    {
+      path: ROUTERS.USER.DANGKY,
+      component: <DangKy />,
     },
   ];
   return (

@@ -266,7 +266,7 @@ function FlightSearch() {
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
+      <form className="flight-search" onSubmit={handleSearch}>
         <div className="form-group">
           <label>Kiểu vé</label>
           <select

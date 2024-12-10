@@ -165,16 +165,16 @@ const Vandehanhly = () => {
             </p>
             <p class="text">
               <span class="span">
-                Biên bản bất thường (PIR) là tài liệu cần thiết để xác nhận vấn
-                đề với hành lý và là cơ sở để QAirline xem xét bồi thường.
+                - Biên bản bất thường (PIR) là tài liệu cần thiết để xác nhận
+                vấn đề với hành lý và là cơ sở để QAirline xem xét bồi thường.
                 <br />
               </span>
             </p>
             <p class="text" />
             <span class="span">
-              QAirline không chịu trách nhiệm đối với các trường hợp hư hỏng nằm
-              trong danh mục miễn trừ trách nhiệm của hành lý ký gửi. Vui lòng
-              xem chi tiết chính sách của hãng.
+              - QAirline không chịu trách nhiệm đối với các trường hợp hư hỏng
+              nằm trong danh mục miễn trừ trách nhiệm của hành lý ký gửi. Vui
+              lòng xem chi tiết chính sách của hãng.
             </span>
           </div>
         </section>
@@ -209,7 +209,7 @@ const Vandehanhly = () => {
             </p>
           </div>
         </section>
-
+        <hr />
         <section id="item3">
           {" "}
           <div class="heading-strong">Hành lý bị bỏ quên</div>
