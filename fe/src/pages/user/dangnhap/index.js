@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { memo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../components/Authentication";
 import "./style.scss";
 import Headermini from "../theme/thongtin";
 
 const Dangnhap = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   // State to manage form inputs
   const [formData, setFormData] = useState({
     username: "",
@@ -42,11 +47,18 @@ const Dangnhap = () => {
       // Parse the response
       const data = await response.json();
 
-      // Set message based on response
-      setMessage(data.message || data.error || "Login attempt completed");
+      if (response.ok) {
+        // Login successful
+        login(data.username, data.password);
+        setMessage("Đăng nhập thành công");
+        // navigate("/"); // Redirect to home page
+      } else {
+        // Login failed
+        setMessage(data.message || "Đăng nhập thất bại");
+      }
     } catch (error) {
       console.error("Error:", error);
-      setMessage("An error occurred during login");
+      setMessage("Đã xảy ra lỗi trong quá trình đăng nhập");
     }
   };
 
@@ -58,7 +70,7 @@ const Dangnhap = () => {
         <h2>Đăng nhập</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="username">User Name</label>
+            <label htmlFor="username">Tên đăng nhập</label>
             <input
               type="text"
               id="username"
@@ -70,7 +82,7 @@ const Dangnhap = () => {
             <i className="user"></i>
           </div>
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mật khẩu</label>
             <input
               type="password"
               id="password"
@@ -88,7 +100,7 @@ const Dangnhap = () => {
         {message && (
           <div
             style={{
-              color: message.includes("error") ? "red" : "green",
+              color: message.includes("thành công") ? "green" : "red",
               marginTop: "10px",
               textAlign: "center",
             }}

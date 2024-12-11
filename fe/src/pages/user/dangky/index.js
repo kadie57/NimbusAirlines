@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { memo } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./style.scss";
 import Headermini from "../theme/thongtin";
 
 const Dangky = () => {
+  const navigate = useNavigate();
+
   // State to manage form inputs
   const [formData, setFormData] = useState({
     username: "",
@@ -31,7 +34,7 @@ const Dangky = () => {
     const data = {
       username: formData.username,
       email: formData.email,
-      password_hash: formData.password, // Note: In a real app, hash the password
+      password_hash: formData.password,
     };
 
     try {
@@ -48,27 +51,28 @@ const Dangky = () => {
       const responseData = await response.json();
 
       // Handle response
-      if (responseData.message) {
+      if (response.ok) {
+        // Đăng ký thành công
         setMessage({
-          text: responseData.message,
+          text: "Đăng ký thành công. Chuyển hướng đến trang đăng nhập...",
           color: "green",
         });
-        // Reset form after successful submission
-        setFormData({
-          username: "",
-          email: "",
-          password: "",
-        });
-      } else if (responseData.error) {
+
+        // Chuyển hướng đến trang đăng nhập sau 2 giây
+        setTimeout(() => {
+          navigate('/dang-nhap');
+        }, 2000);
+      } else {
+        // Đăng ký thất bại
         setMessage({
-          text: responseData.error,
+          text: responseData.error || "Đăng ký không thành công",
           color: "red",
         });
       }
     } catch (error) {
       console.error("Error:", error);
       setMessage({
-        text: "An error occurred. Please try again.",
+        text: "Đã xảy ra lỗi. Vui lòng thử lại.",
         color: "red",
       });
     }
@@ -134,7 +138,7 @@ const Dangky = () => {
           </div>
         )}
         <p className="login-link">
-          Bạn đã có tài khoản? <a href="dang-nhap">Đăng nhập</a>
+          Bạn đã có tài khoản? <Link to="/dang-nhap">Đăng nhập</Link>
         </p>
       </div>
     </>

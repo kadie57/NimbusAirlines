@@ -4,10 +4,22 @@ import { Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
   const [isHome, setIsHome] = useState(location.pathname.length <= 1);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const isHome = location.pathname.length <= 1;
     setIsHome(isHome);
+
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
   }, []);
+
+  // Hàm đăng xuất
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+    // Chuyển hướng về trang chủ hoặc trang đăng nhập
+    window.location.href = "/dang-nhap";
+  };
   return (
     <>
       <div class="navbar">
@@ -62,8 +74,36 @@ const Header = () => {
                 left: "0px",
               }}
             >
-              <a href="dang-nhap">Đăng nhập</a>
-              <a href="dang-ky">Đăng ký</a>
+              {/* Điều kiện render menu dựa trên trạng thái đăng nhập */}
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/dang-nhap">Đăng nhập</Link>
+                  <Link to="/dang-ky">Đăng ký</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/sua-doi-thong-tin">Sửa đổi thông tin cá nhân</Link>
+                  <a>
+                    <button
+                      onClick={handleLogout}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "inherit",
+                        textAlign: "left",
+                        width: "100%",
+                        padding: "0px",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                        height: "100%",
+                        margin: "0px",
+                      }}
+                    >
+                      Đăng xuất
+                    </button>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
