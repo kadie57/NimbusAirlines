@@ -18,6 +18,9 @@ export const ROUTERS = {
     DANGKY: "dang-ky",
     DICHVUUTIEN: "dich-vu-uu-tien",
     PHONGKHACHTHUONGGIA: "phong-khach-thuong-gia",
-    // PROFILE: "sua-doi-thong-tin",
+    PROFILE: "sua-doi-thong-tin",
+  },
+  ADMIN: {
+    DASHBOARD: "dashboard",
   },
 };

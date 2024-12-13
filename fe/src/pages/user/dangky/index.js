@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { memo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./style.scss";
-import Headermini from "../theme/thongtin";
 
 const Dangky = () => {
   const navigate = useNavigate();
@@ -60,7 +59,7 @@ const Dangky = () => {
 
         // Chuyển hướng đến trang đăng nhập sau 2 giây
         setTimeout(() => {
-          navigate('/dang-nhap');
+          navigate("/dang-nhap");
         }, 2000);
       } else {
         // Đăng ký thất bại
@@ -80,7 +79,6 @@ const Dangky = () => {
 
   return (
     <>
-      <Headermini />
       <img src="img/homepage.jpg" alt="" className="background" />
       <div className="container-register">
         <h2>Tạo tài khoản</h2>

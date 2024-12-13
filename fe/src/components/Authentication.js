@@ -1,32 +1,30 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
-// Create AuthContext
 const AuthContext = createContext(null);
 
-// AuthProvider Component
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
-  // Check login status on initial load
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    if (token) {
-      // Verify token with backend if possible
+    const username = localStorage.getItem("username");
+    if (token && username) {
       setIsLoggedIn(true);
+      setUserInfo(username);
     }
   }, []);
 
-  // Login function
-  const login = (userData, token) => {
+  const login = (username, token) => {
     localStorage.setItem("authToken", token);
+    localStorage.setItem("username", username);
     setIsLoggedIn(true);
-    setUserInfo(userData);
+    setUserInfo(username);
   };
 
-  // Logout function
   const logout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
     setIsLoggedIn(false);
     setUserInfo(null);
   };
@@ -45,7 +43,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

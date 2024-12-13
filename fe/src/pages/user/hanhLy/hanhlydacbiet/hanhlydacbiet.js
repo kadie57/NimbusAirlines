@@ -1,7 +1,7 @@
 import { memo } from "react";
 import "./style.scss";
 import { ROUTERS } from "../../../../utils/router";
-import Headermini from "../../theme/thongtin";
+
 const Hanhlydacbiet = () => {
   return (
     <>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/Authentication";
 
 const Profile = () => {
-  const { isLoggedIn, userInfo } = useAuth(); // Add isLoggedIn
+  const { isLoggedIn, userInfo, logout } = useAuth();
   const navigate = useNavigate();
 
   // State for user profile data
@@ -24,7 +24,7 @@ const Profile = () => {
   // Fetch user data when component mounts
   useEffect(() => {
     const fetchUserProfile = async () => {
-      // Check isLoggedIn instead of userInfo
+      // Check if logged in
       if (!isLoggedIn) {
         // Redirect to login if not logged in
         navigate("/dang-nhap");
@@ -32,43 +32,60 @@ const Profile = () => {
       }
 
       try {
+        // Get auth token and username from local storage
+        const token = localStorage.getItem("authToken");
+        const storedUsername = localStorage.getItem("username");
+
+        if (!token || !storedUsername) {
+          logout(); // Clear any stale login state
+          navigate("/dang-nhap");
+          return;
+        }
+
         // Fetch user profile details
         const response = await fetch(
-          `http://54.200.166.229/accounts/${userInfo.username}`,
+          `http://54.200.166.229/accounts/${storedUsername}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
           }
         );
 
+        if (!response.ok) {
+          // Handle unauthorized or token expired
+          if (response.status === 401) {
+            logout();
+            navigate("/dang-nhap");
+            return;
+          }
+
+          throw new Error("Failed to fetch user profile");
+        }
+
         const data = await response.json();
 
-        if (response.ok) {
-          setProfileData({
-            username: data.username,
-            email: data.email,
-            newPassword: "",
-            confirmPassword: "",
-          });
-        } else {
-          setMessage({
-            text: "Không thể tải thông tin người dùng",
-            color: "red",
-          });
-        }
+        // Update profile data
+        setProfileData({
+          username: data.username,
+          email: data.email,
+          newPassword: "",
+          confirmPassword: "",
+        });
       } catch (error) {
         console.error("Error fetching profile:", error);
         setMessage({
-          text: "Đã xảy ra lỗi khi tải thông tin",
+          text: "Không thể tải thông tin người dùng. Vui lòng thử lại.",
           color: "red",
         });
       }
     };
 
     fetchUserProfile();
-  }, [isLoggedIn, userInfo, navigate]);
+  }, [isLoggedIn, navigate, logout]);
+
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,6 +109,14 @@ const Profile = () => {
     }
 
     try {
+      // Get auth token from local storage
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        logout();
+        navigate("/dang-nhap");
+        return;
+      }
+
       // Prepare update data
       const updateData = {
         username: profileData.username,
@@ -108,8 +133,7 @@ const Profile = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            // Include authentication token if required
-            // 'Authorization': `Bearer ${user.token}`
+            Authorization: `Bearer ${token}`, // Add token to authorization header
           },
           body: JSON.stringify(updateData),
         }
@@ -123,7 +147,6 @@ const Profile = () => {
           color: "green",
         });
         setIsEditing(false);
-        // Optional: update user context/local storage
       } else {
         setMessage({
           text: data.error || "Cập nhật thất bại",

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/user/homePage";
 import { ROUTERS } from "./utils/router";
 import MasterLayout from "./pages/user/theme/masterLayout";
@@ -17,7 +17,11 @@ import TinTuc from "./pages/user/tintuc";
 import DangKy from "./pages/user/dangky";
 import Dichvuuutien from "./pages/user/thongtinsanbay/dichvuuutien";
 import Phongkhachthuonggia from "./pages/user/thongtinsanbay/phongkhachthuonggia";
-// import Profile from "./components/UserProfile";
+import Profile from "./components/UserProfile";
+import Dashboard from "./pages/admin/Dashboard";
+
+import AdminLayout from "./pages/admin/theme/adminLayout"; // Add this line
+
 const renderUserRouter = () => {
   const userRouters = [
     {
@@ -84,9 +88,13 @@ const renderUserRouter = () => {
       path: ROUTERS.USER.PHONGKHACHTHUONGGIA,
       component: <Phongkhachthuonggia />,
     },
+    {
+      path: ROUTERS.USER.PROFILE,
+      component: <Profile />,
+    },
     // {
-    //   path: ROUTERS.USER.PROFILE,
-    //   component: <Profile />,
+    //   path: ROUTERS.ADMIN,
+    //   component: <Dashboard />,
     // },
   ];
   return (
@@ -100,7 +108,44 @@ const renderUserRouter = () => {
   );
 };
 const RouterCustom = () => {
-  return renderUserRouter();
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Route user */}
+        <Route path="/*" element={renderUserRouter()} />
+
+        {/* Route admin */}
+        <Route path="/admin/*" element={renderAdminRouter()} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default RouterCustom;
+
+// Import thêm các component admin khác
+
+const renderAdminRouter = () => {
+  const adminRouters = [
+    {
+      path: ROUTERS.ADMIN.DASHBOARD,
+      component: <Dashboard />,
+    },
+    // {
+    //   path: ROUTERS.ADMIN.USERS,
+    //   component: <UserManagement />,
+    // },
+  ];
+
+  return (
+    <AdminLayout>
+      {" "}
+      {/* Tạo một layout riêng cho admin */}
+      <Routes>
+        {adminRouters.map((item, key) => (
+          <Route key={key} path={item.path} element={item.component} />
+        ))}
+      </Routes>
+    </AdminLayout>
+  );
+};

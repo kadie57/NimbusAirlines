@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { ROUTERS } from "../../../../utils/router";
-import Headermini from "../../theme/thongtin";
+
 const Hanhlykygui = () => {
   return (
     <>

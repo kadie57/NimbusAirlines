@@ -1,11 +1,10 @@
 import { memo } from "react";
 import "./style.scss";
 import { ROUTERS } from "../../../../utils/router";
-import Headermini from "../../theme/thongtin";
+
 const Vandehanhly = () => {
   return (
     <>
-      <Headermini />
       <div class="content">
         <div class="TitlePage">Gặp vấn đề với hành lý</div>
         <div class="luggage-banner-wrapper">

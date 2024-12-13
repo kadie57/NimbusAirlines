@@ -57,7 +57,7 @@ const FlightCards = () => {
 
   return (
     <div className="flight-cards-container">
-      <div className="title">Chuyến bay nổi bật</div>
+      <div className="title">Nhiều người cùng chọn</div>
       <div className="cards-grid">
         {flights.map((flight, index) => (
           <div
@@ -66,7 +66,7 @@ const FlightCards = () => {
             onClick={() => openFlightDetails(flight)}
           >
             <div className="flight-card-header">
-              <div className="airline-name">Hạng {flight.class}</div>
+              <div className="airline-name"></div>
               <span className="flight-number">{flight.flightNumber}</span>
             </div>
 

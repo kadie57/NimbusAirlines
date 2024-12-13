@@ -3,7 +3,6 @@ import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../components/Authentication";
 import "./style.scss";
-import Headermini from "../theme/thongtin";
 
 const Dangnhap = () => {
   const navigate = useNavigate();
@@ -29,10 +28,9 @@ const Dangnhap = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     try {
-      // Send POST request to the backend
       const response = await fetch("http://54.200.166.229/login", {
         method: "POST",
         headers: {
@@ -44,16 +42,16 @@ const Dangnhap = () => {
         }),
       });
 
-      // Parse the response
       const data = await response.json();
 
       if (response.ok) {
-        // Login successful
-        login(data.username, data.password);
+        // Sửa đổi ở đây: truyền username và token
+        login(formData.username, data.token);
         setMessage("Đăng nhập thành công");
-        // navigate("/"); // Redirect to home page
+        // Chuyển hướng sau khi đăng nhập
+        navigate("/", { replace: true });
+        window.location.reload();
       } else {
-        // Login failed
         setMessage(data.message || "Đăng nhập thất bại");
       }
     } catch (error) {
@@ -64,7 +62,6 @@ const Dangnhap = () => {
 
   return (
     <>
-      <Headermini />
       <img src="img/homepage.jpg" alt="" className="background" />
       <div className="login-container">
         <h2>Đăng nhập</h2>

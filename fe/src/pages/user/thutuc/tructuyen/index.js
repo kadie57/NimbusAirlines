@@ -1,10 +1,9 @@
 import { memo } from "react";
 import "./style.scss";
-import Headermini from "../../theme/thongtin";
+
 const tttructuyen = () => {
   return (
     <>
-      <Headermini />
       <div class="content">
         <div class="TitlePage">Làm thủ tục trực tuyến</div>
         <div class="luggage-banner-wrapper">

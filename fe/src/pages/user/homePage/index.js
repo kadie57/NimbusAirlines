@@ -7,6 +7,7 @@ import ScrollToHash from "../../../components/ScrollToHash";
 const HomePage = () => {
   return (
     <>
+      <img className="banner" src="img/homepage.jpg" alt="banner" />
       <div className="homepage">
         <ScrollToHash />
         <FlightCards />

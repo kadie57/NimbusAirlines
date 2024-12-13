@@ -1,10 +1,9 @@
 import { memo } from "react";
 import "./style.scss";
-import Headermini from "../../theme/thongtin";
+
 const Baynuocngoai = () => {
   return (
     <>
-      <Headermini />
       <div class="content">
         <div class="TitlePage">Chuyến bay Việt Nam đi quốc tế</div>
         <div class="luggage-banner-wrapper">
