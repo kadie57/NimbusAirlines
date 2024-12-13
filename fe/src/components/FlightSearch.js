@@ -160,6 +160,7 @@
 // dùng API
 import React, { useState, useEffect } from "react";
 import FlightResults from "./FlightResults";
+import BookingModal from "./BookingModal";
 
 function FlightSearch() {
   const [tripType, setTripType] = useState("one-way");
@@ -173,6 +174,13 @@ function FlightSearch() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [flightsData, setFlightsData] = useState([]);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedFlight, setSelectedFlight] = useState(null);
+
+  // Trạng thái cho việc đặt vé khứ hồi
+  const [outboundSelectedFlight, setOutboundSelectedFlight] = useState(null);
+  const [inboundSelectedFlight, setInboundSelectedFlight] = useState(null);
+  const [bookingStage, setBookingStage] = useState("initial"); // Các giai đoạn: 'initial', 'outbound', 'inbound', 'completed'
 
   // Fetch flights data from API
   useEffect(() => {
@@ -203,16 +211,25 @@ function FlightSearch() {
     fetchFlights();
   }, []);
 
+  const swapLocations = () => {
+    const temp = departure;
+    setDeparture(destination);
+    setDestination(temp);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     setIsSearchPerformed(true);
 
+    // Reset booking stages for round trip
+    if (tripType === "round-trip") {
+      setBookingStage("outbound");
+    }
+
     const filtered = flightsData.filter((flight) => {
-      // Convert search inputs to lowercase for case-insensitive comparison
       const searchDeparture = departure.toLowerCase().trim();
       const searchDestination = destination.toLowerCase().trim();
 
-      // Convert flight details to lowercase for comparison
       const matchesDeparture =
         !searchDeparture || flight.departure.toLowerCase() === searchDeparture;
 
@@ -223,33 +240,71 @@ function FlightSearch() {
       const matchesClass = !travelClass || flight.class === travelClass;
       const matchesDepartureDate =
         !departureDate || flight.departureDate === departureDate;
-      const matchesReturnDate =
-        tripType === "round-trip"
-          ? !returnDate || flight.returnDate === returnDate
-          : true;
 
-      const matchesOneWayFlight = tripType === "one-way" && !flight.returnDate;
-
-      const matchesRoundTripFlight =
-        tripType === "round-trip" && flight.returnDate;
+      // Kiểm tra chuyến bay một chiều hoặc khứ hồi
+      // const matchesOneWayFlight = tripType === "one-way" && !flight.returnDate;
+      // const matchesRoundTripFlight =
+      //   tripType === "round-trip" &&
+      //   (bookingStage === "outbound"
+      //     ? !flight.returnDate
+      //     : !!flight.returnDate);
 
       return (
-        matchesDeparture &&
-        matchesDestination &&
-        matchesClass &&
-        matchesDepartureDate &&
-        matchesReturnDate &&
-        (tripType === "one-way" ? matchesOneWayFlight : matchesRoundTripFlight)
+        matchesDeparture && matchesDestination && matchesClass
+        // matchesDepartureDate &&
+        // (tripType === "one-way" ? matchesOneWayFlight : matchesRoundTripFlight)
       );
     });
 
     setFilteredFlights(filtered.length > 0 ? filtered : []);
   };
 
-  const swapLocations = () => {
-    const temp = departure;
-    setDeparture(destination);
-    setDestination(temp);
+  const handleFlightSelect = (flight) => {
+    if (tripType === "one-way") {
+      // Logic đặt vé một chiều
+      setSelectedFlight(flight);
+      setIsBookingModalOpen(true);
+    } else {
+      if (bookingStage === "outbound") {
+        // Lưu chuyến bay đi
+        setOutboundSelectedFlight(flight);
+        setBookingStage("inbound");
+
+        // Tìm kiếm các chuyến bay về
+        const inboundFlights = flightsData.filter(
+          (f) =>
+            f.departure === destination && // Điểm đi của chuyến bay về là điểm đến của chuyến bay đi
+            f.destination === departure // Điểm đến của chuyến bay về là điểm đi của chuyến bay đi
+          // f.departureDate > flight.departureDate // Ngày bay về sau ngày bay đi
+        );
+
+        // Nếu không tìm thấy chuyến bay về, hiển thị thông báo
+        if (inboundFlights.length === 0) {
+          window.alert("Không tìm thấy chuyến bay trở về phù hợp!");
+          // Quay lại giai đoạn ban đầu
+          setBookingStage("initial");
+          return;
+        }
+
+        // Cập nhật danh sách chuyến bay để hiển thị các chuyến bay về
+        setFilteredFlights(inboundFlights);
+      } else if (bookingStage === "inbound") {
+        // Lưu chuyến bay về
+        setSelectedFlight(flight);
+        setIsBookingModalOpen(true);
+      }
+    }
+  };
+  const handleBookingSubmit = (bookingInfo) => {
+    // Xử lý logic đặt vé ở đây
+    console.log("Thông tin đặt vé:", bookingInfo);
+    // Có thể gửi thông tin đặt vé lên server
+  };
+
+  const resetBooking = () => {
+    setBookingStage("initial");
+    setOutboundSelectedFlight(null);
+    setInboundSelectedFlight(null);
   };
 
   if (isLoading) {
@@ -337,9 +392,19 @@ function FlightSearch() {
         <button type="submit">Tìm kiếm</button>
       </form>
 
+      <BookingModal 
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        flight={selectedFlight}
+        onSubmit={handleBookingSubmit}/>
+
       <FlightResults
         flights={filteredFlights}
         isSearchPerformed={isSearchPerformed}
+        tripType={tripType}
+        bookingStage={bookingStage}
+        onFlightSelect={handleFlightSelect}
+        
       />
     </div>
   );
