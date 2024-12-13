@@ -15,6 +15,9 @@ import Datve from "./pages/user/datve";
 import Dangnhap from "./pages/user/dangnhap";
 import TinTuc from "./pages/user/tintuc";
 import DangKy from "./pages/user/dangky";
+import Dichvuuutien from "./pages/user/thongtinsanbay/dichvuuutien";
+import Phongkhachthuonggia from "./pages/user/thongtinsanbay/phongkhachthuonggia";
+// import Profile from "./components/UserProfile";
 const renderUserRouter = () => {
   const userRouters = [
     {
@@ -73,6 +76,18 @@ const renderUserRouter = () => {
       path: ROUTERS.USER.DANGKY,
       component: <DangKy />,
     },
+    {
+      path: ROUTERS.USER.DICHVUUTIEN,
+      component: <Dichvuuutien />,
+    },
+    {
+      path: ROUTERS.USER.PHONGKHACHTHUONGGIA,
+      component: <Phongkhachthuonggia />,
+    },
+    // {
+    //   path: ROUTERS.USER.PROFILE,
+    //   component: <Profile />,
+    // },
   ];
   return (
     <MasterLayout>

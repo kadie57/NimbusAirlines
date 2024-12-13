@@ -1,3 +1,5 @@
+import phongkhachthuonggia from "../pages/user/thongtinsanbay/phongkhachthuonggia";
+
 export const ROUTERS = {
   USER: {
     HOME: "",
@@ -14,5 +16,8 @@ export const ROUTERS = {
     DANGNHAP: "dang-nhap",
     TINTUC: "tin-tuc",
     DANGKY: "dang-ky",
+    DICHVUUTIEN: "dich-vu-uu-tien",
+    PHONGKHACHTHUONGGIA: "phong-khach-thuong-gia",
+    // PROFILE: "sua-doi-thong-tin",
   },
 };

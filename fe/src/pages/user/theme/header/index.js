@@ -48,12 +48,16 @@ const Header = () => {
               </div>
               <div class="has-sub-dropdown">
                 <a href="tt-san-bay">Thông tin sân bay</a>
+                <div class="sub-dropdown" style={{ top: "0px" }}>
+                  <a href="phong-khach-thuong-gia">Phòng khách thương gia</a>
+                  <a href="dich-vu-uu-tien">Dịch vụ ưu tiên</a>
+                </div>
               </div>
               <div class="has-sub-dropdown">
                 <a href="#">Cẩm nang bay</a>
                 <div class="sub-dropdown" style={{ top: "0px" }}>
                   <a href="noi-dia">Chuyến bay nội địa Việt Nam</a>
-                  <a href="nuoc-ngoai">Chuyến bay Việt Nam đi nước ngoài</a>
+                  <a href="nuoc-ngoai">Chuyến bay Việt Nam đi quốc tế</a>
                 </div>
               </div>
             </div>
@@ -77,8 +81,8 @@ const Header = () => {
               {/* Điều kiện render menu dựa trên trạng thái đăng nhập */}
               {!isLoggedIn ? (
                 <>
-                  <Link to="/dang-nhap">Đăng nhập</Link>
-                  <Link to="/dang-ky">Đăng ký</Link>
+                  <a href="/dang-nhap">Đăng nhập</a>
+                  <a href="/dang-ky">Đăng ký</a>
                 </>
               ) : (
                 <>
@@ -108,7 +112,51 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isHome && <img className="banner" src="img/homepage.jpg" alt="banner" />}
+      {isHome && (
+        <div>
+          <img className="banner" src="img/homepage.jpg" alt="banner" />
+          {/* <div class="banner-text">
+              <span
+                style={{
+                  color: "#003875",
+                  fontSize: "44px",
+                  fontFamily: "Inria Sans",
+                  fontWeight: 400,
+                  lineHeight: "54.51px",
+                  wordWrap: "break-word",
+                }}
+              >
+                Time to{" "}
+              </span>
+              <br />
+              <span
+                style={{
+                  color: "#003875",
+                  fontSize: "130px",
+                  fontFamily: "Inria Sans",
+                  fontWeight: 700,
+                  lineHeight: "141.21px",
+                  wordWrap: "break-word",
+                }}
+              >
+                EXPLORE{" "}
+              </span>
+              <br />
+              <span
+                style={{
+                  color: "#003875",
+                  fontSize: "88px",
+                  fontFamily: "Inria Sans",
+                  fontWeight: 700,
+                  lineHeight: "108.94px",
+                  wordWrap: "break-word",
+                }}
+              >
+                THE WORLD
+              </span>
+            </div> */}
+        </div>
+      )}
     </>
   );
 };

@@ -282,7 +282,7 @@ function FlightResults({ flights, isSearchPerformed, isLoading }) {
                   gap: "10px",
                 }}
               >
-                <input
+                {/* <input
                   type="number"
                   min="0"
                   max="10"
@@ -295,7 +295,7 @@ function FlightResults({ flights, isSearchPerformed, isLoading }) {
                     padding: "5px",
                     textAlign: "center",
                   }}
-                />
+                /> */}
                 <button
                   className="buy-ticket-button"
                   disabled={ticketQuantities[index] === 0}
