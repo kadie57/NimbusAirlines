@@ -21,6 +21,9 @@ import Profile from "./components/UserProfile";
 import Dashboard from "./pages/admin/Dashboard";
 
 import AdminLayout from "./pages/admin/theme/adminLayout"; // Add this line
+import BookedFlights from "./components/BookedFlight";
+import FlightManagement from "./pages/admin/FlightManagement";
+import PlaneManagement from "./pages/admin/PlaneManagement";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -92,10 +95,10 @@ const renderUserRouter = () => {
       path: ROUTERS.USER.PROFILE,
       component: <Profile />,
     },
-    // {
-    //   path: ROUTERS.ADMIN,
-    //   component: <Dashboard />,
-    // },
+    {
+      path: ROUTERS.USER.VEDADAT,
+      component: <BookedFlights />,
+    },
   ];
   return (
     <MasterLayout>
@@ -130,6 +133,14 @@ const renderAdminRouter = () => {
     {
       path: ROUTERS.ADMIN.DASHBOARD,
       component: <Dashboard />,
+    },
+    {
+      path: ROUTERS.ADMIN.FLIGHTMANAGEMENT,
+      component: <FlightManagement />,
+    },
+    {
+      path: ROUTERS.ADMIN.PLANEMANAGEMENT,
+      component: <PlaneManagement />,
     },
     // {
     //   path: ROUTERS.ADMIN.USERS,

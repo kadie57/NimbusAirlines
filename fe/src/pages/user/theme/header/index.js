@@ -33,10 +33,10 @@ const Header = () => {
               <div class="has-sub-dropdown">
                 <Link to="#">Hành Lý</Link>
                 <div class="sub-dropdown">
-                  <Link to="hanh-ly-xach-tay">Hành lý xách tay</Link>
-                  <Link to="hanh-ly-ky-gui">Hành lý ký gửi</Link>
-                  <Link to="hanh-ly-dac-biet">Hành lý đặc biệt</Link>
-                  <Link to="gap-van-de-voi-hanh-ly">
+                  <Link to="/hanh-ly-xach-tay">Hành lý xách tay</Link>
+                  <Link to="/hanh-ly-ky-gui">Hành lý ký gửi</Link>
+                  <Link to="/hanh-ly-dac-biet">Hành lý đặc biệt</Link>
+                  <Link to="/gap-van-de-voi-hanh-ly">
                     Gặp vấn đề với hành lý
                   </Link>
                 </div>
@@ -44,30 +44,30 @@ const Header = () => {
               <div class="has-sub-dropdown">
                 <Link to="#">Làm thủ tục</Link>
                 <div class="sub-dropdown" style={{ top: "0px" }}>
-                  <Link to="tt-truc-tiep">Làm thủ tục trực tiếp</Link>
-                  <Link to="tt-truc-tuyen">Làm thủ tục trực tuyến</Link>
+                  <Link to="/tt-truc-tiep">Làm thủ tục trực tiếp</Link>
+                  <Link to="/tt-truc-tuyen">Làm thủ tục trực tuyến</Link>
                 </div>
               </div>
               <div class="has-sub-dropdown">
-                <Link to="tt-san-bay">Thông tin sân bay</Link>
+                <Link to="/tt-san-bay">Thông tin sân bay</Link>
                 <div class="sub-dropdown" style={{ top: "0px" }}>
-                  <Link to="phong-khach-thuong-gia">
+                  <Link to="/phong-khach-thuong-gia">
                     Phòng khách thương gia
                   </Link>
-                  <Link to="dich-vu-uu-tien">Dịch vụ ưu tiên</Link>
+                  <Link to="/dich-vu-uu-tien">Dịch vụ ưu tiên</Link>
                 </div>
               </div>
               <div class="has-sub-dropdown">
                 <Link to="#">Cẩm nang bay</Link>
                 <div class="sub-dropdown" style={{ top: "0px" }}>
-                  <Link to="noi-dia">Chuyến bay nội địa Việt Nam</Link>
-                  <Link to="nuoc-ngoai">Chuyến bay Việt Nam đi quốc tế</Link>
+                  <Link to="/noi-dia">Chuyến bay nội địa Việt Nam</Link>
+                  <Link to="/nuoc-ngoai">Chuyến bay Việt Nam đi quốc tế</Link>
                 </div>
               </div>
             </div>
           </div>
-          <Link to="tim-chuyen">Tìm chuyến</Link>
-          <Link to="dat-ve">Đặt vé</Link>
+          <Link to="/tim-chuyen">Tìm chuyến</Link>
+          <Link to="/dat-ve">Đặt vé</Link>
           <Link to="/#tin">Tin tức</Link>
           <div class="has-dropdown">
             <Link to="#">Tài khoản</Link>
@@ -91,6 +91,7 @@ const Header = () => {
               ) : (
                 <>
                   <Link to="/sua-doi-thong-tin">Sửa đổi thông tin cá nhân</Link>
+                  <Link to="/ve-da-dat">Vé đã đặt</Link>
                   <a>
                     <button
                       onClick={handleLogout}

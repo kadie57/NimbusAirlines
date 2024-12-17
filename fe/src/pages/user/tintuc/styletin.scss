@@ -24,12 +24,12 @@ body {
   background-color: #000;
   margin: 10px auto 0;
 }
-.cards {
+.container-tin-tuc .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.card {
+.container-tin-tuc .card {
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -39,36 +39,36 @@ body {
   overflow: hidden;
   height: 502px;
 }
-.card img {
+.container-tin-tuc .card img {
   width: 100%;
   height: auto;
 }
-.card-content {
+.container-tin-tuc .card-content {
   padding: 15px;
 }
-.card-title {
+.container-tin-tuc .card-title {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
-.card-description {
+.container-tin-tuc .card-description {
   font-size: 0.9em;
   color: #555;
 }
-.pagination {
+.container-tin-tuc .pagination {
   margin-top: 20px;
 }
-.pagination i {
+.container-tin-tuc .pagination i {
   margin: 0 5px;
   cursor: pointer;
 }
 @media (max-width: 768px) {
-  .card {
+  .container-tin-tuc .card {
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
 }
 @media (max-width: 480px) {
-  .card {
+  .container-tin-tuc .card {
     flex: 1 1 100%;
     max-width: 100%;
   }

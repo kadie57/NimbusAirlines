@@ -1,0 +1,308 @@
+/* body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+} */
+
+.flight-management {
+  width: 1200px;
+  padding: 20px;
+  margin-left: 260px;
+  background-color: #f4f4f4;
+}
+.flight-management-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* .flight-management .card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+} */
+
+.flight-management .input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.flight-management .form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.flight-management button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 20px;
+
+  /* width: 100%; */
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* .view-all-button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+.flight-management .btn:hover {
+  background-color: #2980b9;
+}
+
+.flight-management .btn-danger {
+  background-color: #e74c3c;
+}
+
+.flight-management .btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.flight-management .alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .input-group {
+    grid-template-columns: 1fr;
+  }
+}
+/* .flight-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+} */
+
+.flight-management .flight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
+  gap: 15px;
+}
+
+.flight-management .flight-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flight-management .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.flight-management .modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  position: relative;
+}
+
+.flight-management .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.flight-management .flight-details p {
+  margin: 10px 0;
+}
+.flight-management h2 {
+  margin-bottom: 20px;
+}
+.flight-list {
+  position: relative;
+  height: 550px;
+}
+.AddFlight {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.flight-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+}
+
+.flight-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.flight-card:hover {
+  transform: scale(1.02);
+}
+
+.flight-card-header {
+  background-color: #3498db;
+  padding: 10px;
+  text-align: center;
+}
+
+.flight-number {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.flight-card-body {
+  padding: 15px;
+}
+
+.flight-route {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.flight-route .departure,
+.flight-route .destination {
+  font-weight: bold;
+}
+
+.flight-route .arrow {
+  color: #888;
+  margin: 0 10px;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #3498db18;
+  padding: 5px;
+}
+
+.detail-item .label {
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.detail-item .value {
+  font-weight: bold;
+}
+
+.add-flight-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .form-group.full-width {
+  flex: 100%;
+} */
+
+.form-group label {
+  margin-bottom: 5px;
+  color: #2980b9;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  height: 22.4px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-add-flight,
+.btn-reset {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-flight {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.btn-add-flight:hover {
+  background-color: #357abd;
+}
+
+/* .btn-reset {
+  background-color: #f0f0f0;
+  color: #333;
+} */
+
+/* .btn-reset:hover {
+  background-color: #e0e0e0;
+} */
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+}

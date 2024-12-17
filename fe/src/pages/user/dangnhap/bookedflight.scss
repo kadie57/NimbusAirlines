@@ -1,0 +1,126 @@
+/* Booked Flights Stylesheet */
+// body {
+//     font-family: 'Arial', sans-serif;
+//     background-color: #f4f4f4;
+//     margin: 0;
+//     padding: 0;
+//     line-height: 1.6;
+// }
+
+.booked-flights-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.username-search {
+  display: flex;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.username-search input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+}
+
+.username-search button {
+  padding: 10px 20px;
+  background-color: #4385cb;
+  color: white;
+  border: 1px solid #295f98;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+
+.username-search button:hover {
+  background-color: #295f98;
+}
+
+.bookings-list {
+  display: grid;
+  gap: 20px;
+}
+
+.booking-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.booking-details {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.booking-details p {
+  margin: 8px 0;
+  color: #333;
+}
+
+.booking-details p strong {
+  color: #295f98;
+  margin-right: 10px;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.cancel-booking-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-booking-btn:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booking-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .booking-details {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .booking-details p strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+/* Empty State Styling */
+.bookings-list:empty::before {
+  content: "Không có vé đặt nào";
+  display: block;
+  text-align: center;
+  color: #6c757d;
+  padding: 50px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}

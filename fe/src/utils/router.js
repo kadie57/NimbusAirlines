@@ -19,8 +19,11 @@ export const ROUTERS = {
     DICHVUUTIEN: "dich-vu-uu-tien",
     PHONGKHACHTHUONGGIA: "phong-khach-thuong-gia",
     PROFILE: "sua-doi-thong-tin",
+    VEDADAT: "ve-da-dat",
   },
   ADMIN: {
-    DASHBOARD: "dashboard",
+    DASHBOARD: "",
+    FLIGHTMANAGEMENT: "flight-management",
+    PLANEMANAGEMENT: "plane-management",
   },
 };

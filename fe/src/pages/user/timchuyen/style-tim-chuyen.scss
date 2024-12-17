@@ -57,6 +57,7 @@ h2 {
 }
 label {
   margin-bottom: 5px;
+  text-align: left;
 }
 .App input,
 select {
@@ -64,7 +65,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 30px;
 }
-button {
+.App button {
   background-color: #4596d5;
   color: white;
   padding: 10px;
@@ -198,7 +199,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   z-index: 1000;
 }
 
@@ -208,7 +209,7 @@ button:hover {
   border-radius: 10px;
   width: 90%;
   max-width: 500px;
-  text-align: center;
+
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -251,8 +252,8 @@ button:hover {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
   z-index: 1000;
 }
 
@@ -263,16 +264,26 @@ button:hover {
   width: 400px;
   max-width: 90%;
 }
-
+.modal-content label {
+  text-align: left;
+  width: 200px;
+  margin-bottom: 5px; /* Tạo khoảng cách giữa label và input */
+}
 .modal-content form > div {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
+}
+
+.modal-content span {
+  align-self: flex-end; /* Căn phải */
+  color: #666;
+  font-size: 0.9em;
 }
 
 .modal-content input,
 .modal-content select {
-  width: 100%;
   padding: 8px;
-  margin-top: 5px;
 }
 
 .modal-actions {

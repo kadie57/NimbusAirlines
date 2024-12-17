@@ -1,5 +1,4 @@
 import { memo } from "react";
-import "./style.scss";
 import { ROUTERS } from "../../../../utils/router";
 
 const Hanhlydacbiet = () => {

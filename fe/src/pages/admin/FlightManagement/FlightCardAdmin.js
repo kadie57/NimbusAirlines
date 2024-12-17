@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const FlightCards = () => {
+const FlightCardsAdmin = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -57,7 +57,7 @@ const FlightCards = () => {
 
   return (
     <div className="flight-cards-container">
-      <div className="title">Nhiều người cùng chọn</div>
+      <h2>Flight List</h2>
       <div className="cards-grid">
         {flights.map((flight, index) => (
           <div
@@ -66,6 +66,7 @@ const FlightCards = () => {
             onClick={() => openFlightDetails(flight)}
           >
             <div className="flight-card-header">
+              <div className="airline-name"></div>
               <span className="flight-number">{flight.flightNumber}</span>
             </div>
 
@@ -84,13 +85,6 @@ const FlightCards = () => {
                 <i className="icon icon-location"></i>
                 <span>
                   {flight.departure} → {flight.destination}
-                </span>
-              </div>
-
-              <div className="flight-detail">
-                <i className="icon icon-status"></i>
-                <span className="flight-price">
-                  {flight.returnDate === null ? "Một chiều" : "Khứ hồi"}
                 </span>
               </div>
             </div>
@@ -131,19 +125,16 @@ const FlightCards = () => {
                 <strong>Loại vé:</strong>{" "}
                 {selectedFlight.returnDate === null ? "Một chiều" : "Khứ hồi"}
               </div> */}
-              {selectedFlight.returnDate && (
+              {/* {selectedFlight.returnDate && (
                 <>
-                  <div className="detail-item">
-                    <strong>Ngày trở về:</strong> {selectedFlight.returnDate}
-                  </div>
                   <div className="detail-item">
                     <strong>Giờ trở về:</strong> {selectedFlight.returnTime}
                   </div>
                 </>
-              )}
-              <div className="detail-item">
+              )} */}
+              {/* <div className="detail-item">
                 <strong>Giá vé:</strong> {selectedFlight.price}$
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -152,4 +143,4 @@ const FlightCards = () => {
   );
 };
 
-export default FlightCards;
+export default FlightCardsAdmin;
