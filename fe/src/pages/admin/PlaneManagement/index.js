@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./PlaneManage.css";
+
 const PlaneManagement = () => {
   // State for planes and form inputs
   const [planes, setPlanes] = useState([]);
+  const [showAllPlanes, setShowAllPlanes] = useState(false);
 
   // Add Plane Form State
   const [addPlaneForm, setAddPlaneForm] = useState({
@@ -69,24 +70,28 @@ const PlaneManagement = () => {
       });
 
       const result = await response.json();
-      alert(result.message || result.error);
 
-      // Reset form and refresh planes
-      setAddPlaneForm({
-        flightNumber: "",
-        manufacturer: "",
-        model: "",
-        year: "",
-        details: "",
-        maxSeats: "",
-        maxEco: "",
-        maxBus: "",
-        maxFirst: "",
-      });
-      fetchPlanes();
+      if (result.error) {
+        alert(result.error);
+      } else {
+        alert(result.message || "Máy bay đã được thêm thành công");
+        // Reset form
+        setAddPlaneForm({
+          flightNumber: "",
+          manufacturer: "",
+          model: "",
+          year: "",
+          details: "",
+          maxSeats: "",
+          maxEco: "",
+          maxBus: "",
+          maxFirst: "",
+        });
+        fetchPlanes();
+      }
     } catch (error) {
       console.error("Error adding plane:", error);
-      alert("Failed to add plane. Please try again.");
+      alert("Thêm máy bay thất bại. Vui lòng thử lại.");
     }
   };
 
@@ -114,50 +119,73 @@ const PlaneManagement = () => {
       );
 
       const result = await response.json();
-      alert(result.message || result.error);
 
-      // Reset form and refresh planes
-      setUpdatePlaneForm({
-        flightNumber: "",
-        manufacturer: "",
-        model: "",
-        year: "",
-        details: "",
-        maxSeats: "",
-        maxEco: "",
-        maxBus: "",
-        maxFirst: "",
-      });
-      fetchPlanes();
+      if (result.error) {
+        alert(result.error);
+      } else {
+        alert(result.message || "Máy bay đã được cập nhật thành công");
+        // Reset form
+        setUpdatePlaneForm({
+          flightNumber: "",
+          manufacturer: "",
+          model: "",
+          year: "",
+          details: "",
+          maxSeats: "",
+          maxEco: "",
+          maxBus: "",
+          maxFirst: "",
+        });
+        fetchPlanes();
+      }
     } catch (error) {
       console.error("Error updating plane:", error);
-      alert("Failed to update plane. Please try again.");
+      alert("Cập nhật máy bay thất bại. Vui lòng thử lại.");
     }
   };
 
   // Delete Plane Handler
   const handleDeletePlane = async () => {
     try {
-      const planeData = {
-        flightnumber: deletePlaneForm.flightNumber,
-      };
-
       const response = await fetch("http://54.200.166.229/delete_plane", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(planeData),
+        body: JSON.stringify({
+          flightnumber: deletePlaneForm.flightNumber,
+        }),
       });
 
       const result = await response.json();
-      alert(result.message || result.error);
 
-      // Reset form and refresh planes
-      setDeletePlaneForm({ flightNumber: "" });
-      fetchPlanes();
+      if (result.error) {
+        alert(result.error);
+      } else {
+        alert(result.message || "Máy bay đã được xóa thành công");
+        // Reset form
+        setDeletePlaneForm({ flightNumber: "" });
+        fetchPlanes();
+      }
     } catch (error) {
       console.error("Error deleting plane:", error);
-      alert("Failed to delete plane. Please try again.");
+      alert("Xóa máy bay thất bại. Vui lòng thử lại.");
     }
+  };
+
+  // Input change handlers
+  const handleAddInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddPlaneForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatePlaneForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   // Fetch planes on component mount
@@ -165,217 +193,400 @@ const PlaneManagement = () => {
     fetchPlanes();
   }, []);
 
+  // Toggle show all planes
+  const toggleShowAllPlanes = () => {
+    setShowAllPlanes(!showAllPlanes);
+  };
+
   return (
-    <div className="plane-management">
+    <div className="flight-management">
       {/* Plane List */}
-      <div className="plane-management-content">
-        <h2>Plane List</h2>
-        <ul>
-          {planes.map((plane, index) => (
-            <li key={index}>
-              <strong>Flight Number:</strong> {plane.flightNumber}
-              <br />
-              <strong>Manufacturer:</strong> {plane.manufacturer}
-              <br />
-              <strong>Model:</strong> {plane.model}
-              <br />
-              <strong>Year:</strong> {plane.year}
-              <br />
-              <strong>Details:</strong> {plane.details || "N/A"}
-              <br />
-              <strong>Max Seats:</strong> {plane.max_seats}
-              <br />
-              <strong>Max Economy:</strong> {plane.max_eco}
-              <br />
-              <strong>Max Business:</strong> {plane.max_bus}
-              <br />
-              <strong>Max First Class:</strong> {plane.max_first}
-              <br />
-              <hr />
-            </li>
+      <div className="flight-management-content">
+        <h2>Danh sách máy bay</h2>
+        <div className="flight-list-grid">
+          {(showAllPlanes ? planes : planes.slice(0, 6)).map((plane, index) => (
+            <div key={index} className="flight-card">
+              <div className="flight-card-header">
+                <span className="flight-number">{plane.flightNumber}</span>
+              </div>
+
+              <div className="flight-card-body">
+                <div className="flight-route">
+                  <span className="departure">{plane.manufacturer}</span>
+                  <span className="arrow">- Model:</span>
+                  <span className="destination">{plane.model}</span>
+                </div>
+                <div className="flight-details">
+                  <div className="detail-item">
+                    <span className="label">Năm sản xuất:</span>
+                    <span className="value">{plane.year}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Tổng số ghế:</span>
+                    <span className="value">{plane.max_seats}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Ghế Eco:</span>
+                    <span className="value">{plane.max_eco}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Ghế Thương Gia:</span>
+                    <span className="value">{plane.max_bus}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Ghế Hạng Nhất:</span>
+                    <span className="value">{plane.max_first}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        {planes.length > 6 && (
+          <button onClick={toggleShowAllPlanes} className="view-all-button">
+            {showAllPlanes
+              ? "Thu gọn"
+              : `Xem tất cả (${planes.length} máy bay)`}
+          </button>
+        )}
       </div>
+
       {/* Add Plane */}
-      <div className="plane-management-content">
-        <h2>Add Plane</h2>
-        <input
-          type="text"
-          placeholder="Flight Number"
-          value={addPlaneForm.flightNumber}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, flightNumber: e.target.value })
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Manufacturer"
-          value={addPlaneForm.manufacturer}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, manufacturer: e.target.value })
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Model"
-          value={addPlaneForm.model}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, model: e.target.value })
-          }
-          required
-        />
-        <input
-          type="number"
-          placeholder="Year"
-          value={addPlaneForm.year}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, year: e.target.value })
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Details"
-          value={addPlaneForm.details}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, details: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Max Seats"
-          value={addPlaneForm.maxSeats}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, maxSeats: e.target.value })
-          }
-          required
-        />
-        <input
-          type="number"
-          placeholder="Max Economy"
-          value={addPlaneForm.maxEco}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, maxEco: e.target.value })
-          }
-          required
-        />
-        <input
-          type="number"
-          placeholder="Max Business"
-          value={addPlaneForm.maxBus}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, maxBus: e.target.value })
-          }
-          required
-        />
-        <input
-          type="number"
-          placeholder="Max First Class"
-          value={addPlaneForm.maxFirst}
-          onChange={(e) =>
-            setAddPlaneForm({ ...addPlaneForm, maxFirst: e.target.value })
-          }
-          required
-        />
-        <button onClick={handleAddPlane}>Add Plane</button>
+      <div className="flight-management-content add-flight-section">
+        <h2>Thêm Máy Bay Mới</h2>
+        <form
+          className="add-flight-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddPlane();
+          }}
+        >
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="flightNumber">Số chuyến bay:</label>
+              <input
+                type="text"
+                id="flightNumber"
+                name="flightNumber"
+                value={addPlaneForm.flightNumber}
+                onChange={handleAddInputChange}
+                placeholder="Nhập số chuyến bay"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="manufacturer">Hãng sản xuất:</label>
+              <input
+                type="text"
+                id="manufacturer"
+                name="manufacturer"
+                value={addPlaneForm.manufacturer}
+                onChange={handleAddInputChange}
+                placeholder="Nhập hãng sản xuất"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="model">Mẫu máy bay:</label>
+              <input
+                type="text"
+                id="model"
+                name="model"
+                value={addPlaneForm.model}
+                onChange={handleAddInputChange}
+                placeholder="Nhập mẫu máy bay"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="year">Năm sản xuất:</label>
+              <input
+                type="number"
+                id="year"
+                name="year"
+                value={addPlaneForm.year}
+                onChange={handleAddInputChange}
+                placeholder="Nhập năm sản xuất"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="maxSeats">Tổng số ghế:</label>
+              <input
+                type="number"
+                id="maxSeats"
+                name="maxSeats"
+                value={addPlaneForm.maxSeats}
+                onChange={handleAddInputChange}
+                placeholder="Nhập tổng số ghế"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="details">Chi tiết:</label>
+              <input
+                type="text"
+                id="details"
+                name="details"
+                value={addPlaneForm.details}
+                onChange={handleAddInputChange}
+                placeholder="Nhập chi tiết thêm"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="maxEco">Số ghế Eco:</label>
+              <input
+                type="number"
+                id="maxEco"
+                name="maxEco"
+                value={addPlaneForm.maxEco}
+                onChange={handleAddInputChange}
+                placeholder="Nhập số ghế Eco"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="maxBus">Số ghế Thương Gia:</label>
+              <input
+                type="number"
+                id="maxBus"
+                name="maxBus"
+                value={addPlaneForm.maxBus}
+                onChange={handleAddInputChange}
+                placeholder="Nhập số ghế Thương Gia"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="maxFirst">Số ghế Hạng Nhất:</label>
+              <input
+                type="number"
+                id="maxFirst"
+                name="maxFirst"
+                value={addPlaneForm.maxFirst}
+                onChange={handleAddInputChange}
+                placeholder="Nhập số ghế Hạng Nhất"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn-add-flight">
+              Thêm Máy Bay
+            </button>
+            <button
+              type="reset"
+              className="btn-reset"
+              onClick={() =>
+                setAddPlaneForm({
+                  flightNumber: "",
+                  manufacturer: "",
+                  model: "",
+                  year: "",
+                  details: "",
+                  maxSeats: "",
+                  maxEco: "",
+                  maxBus: "",
+                  maxFirst: "",
+                })
+              }
+            >
+              Đặt Lại
+            </button>
+          </div>
+        </form>
       </div>
+
       {/* Update Plane */}
-      <div className="plane-management-content">
-        <h2>Update Plane</h2>
-        <input
-          type="text"
-          placeholder="Flight Number"
-          value={updatePlaneForm.flightNumber}
-          onChange={(e) =>
-            setUpdatePlaneForm({
-              ...updatePlaneForm,
-              flightNumber: e.target.value,
-            })
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Manufacturer"
-          value={updatePlaneForm.manufacturer}
-          onChange={(e) =>
-            setUpdatePlaneForm({
-              ...updatePlaneForm,
-              manufacturer: e.target.value,
-            })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Model"
-          value={updatePlaneForm.model}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, model: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Year"
-          value={updatePlaneForm.year}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, year: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Details"
-          value={updatePlaneForm.details}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, details: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Max Seats"
-          value={updatePlaneForm.maxSeats}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, maxSeats: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Max Economy"
-          value={updatePlaneForm.maxEco}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, maxEco: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Max Business"
-          value={updatePlaneForm.maxBus}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, maxBus: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Max First Class"
-          value={updatePlaneForm.maxFirst}
-          onChange={(e) =>
-            setUpdatePlaneForm({ ...updatePlaneForm, maxFirst: e.target.value })
-          }
-        />
-        <button onClick={handleUpdatePlane}>Update Plane</button>
+      <div className="flight-management-content add-flight-section">
+        <h2>Sửa Thông Tin Máy Bay</h2>
+        <form
+          className="add-flight-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleUpdatePlane();
+          }}
+        >
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="updateFlightNumber">Số chuyến bay:</label>
+              <input
+                type="text"
+                id="updateFlightNumber"
+                name="flightNumber"
+                value={updatePlaneForm.flightNumber}
+                onChange={(e) =>
+                  setUpdatePlaneForm({
+                    ...updatePlaneForm,
+                    flightNumber: e.target.value,
+                  })
+                }
+                placeholder="Nhập số chuyến bay"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateManufacturer">Hãng sản xuất:</label>
+              <input
+                type="text"
+                id="updateManufacturer"
+                name="manufacturer"
+                value={updatePlaneForm.manufacturer}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập hãng sản xuất"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateModel">Mẫu máy bay:</label>
+              <input
+                type="text"
+                id="updateModel"
+                name="model"
+                value={updatePlaneForm.model}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập mẫu máy bay"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="updateYear">Năm sản xuất:</label>
+              <input
+                type="number"
+                id="updateYear"
+                name="year"
+                value={updatePlaneForm.year}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateMaxSeats">Tổng số ghế:</label>
+              <input
+                type="number"
+                id="updateMaxSeats"
+                name="maxSeats"
+                value={updatePlaneForm.maxSeats}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập tổng số ghế"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateDetails">Chi tiết:</label>
+              <input
+                type="text"
+                id="updateDetails"
+                name="details"
+                value={updatePlaneForm.details}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập chi tiết thêm"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="updateMaxEco">Số ghế Eco:</label>
+              <input
+                type="number"
+                id="updateMaxEco"
+                name="maxEco"
+                value={updatePlaneForm.maxEco}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập số ghế Eco"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateMaxBus">Số ghế Thương Gia:</label>
+              <input
+                type="number"
+                id="updateMaxBus"
+                name="maxBus"
+                value={updatePlaneForm.maxBus}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập số ghế Thương Gia"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="updateMaxFirst">Số ghế Hạng Nhất:</label>
+              <input
+                type="number"
+                id="updateMaxFirst"
+                name="maxFirst"
+                value={updatePlaneForm.maxFirst}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập số ghế Hạng Nhất"
+              />
+            </div>
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn-add-flight">
+              Cập Nhật Máy Bay
+            </button>
+            <button
+              type="reset"
+              className="btn-reset"
+              onClick={() =>
+                setUpdatePlaneForm({
+                  flightNumber: "",
+                  manufacturer: "",
+                  model: "",
+                  year: "",
+                  details: "",
+                  maxSeats: "",
+                  maxEco: "",
+                  maxBus: "",
+                  maxFirst: "",
+                })
+              }
+            >
+              Đặt Lại
+            </button>
+          </div>
+        </form>
       </div>
+
       {/* Delete Plane */}
-      <div className="plane-management-content">
-        <h2>Delete Plane</h2>
-        <input
-          type="text"
-          placeholder="Flight Number"
-          value={deletePlaneForm.flightNumber}
-          onChange={(e) => setDeletePlaneForm({ flightNumber: e.target.value })}
-          required
-        />
-        <button onClick={handleDeletePlane}>Delete Plane</button>
+      <div className="flight-management-content add-flight-section">
+        <h2>Xóa Máy Bay</h2>
+        <form
+          className="add-flight-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleDeletePlane();
+          }}
+        >
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="deleteFlightNumber">Số chuyến bay:</label>
+              <input
+                type="text"
+                id="deleteFlightNumber"
+                name="flightNumber"
+                value={deletePlaneForm.flightNumber}
+                onChange={(e) =>
+                  setDeletePlaneForm({ flightNumber: e.target.value })
+                }
+                placeholder="Nhập số chuyến bay để xóa"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn-add-flight btn-danger">
+              Xóa Máy Bay
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

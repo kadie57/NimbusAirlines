@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "./Authentication"; // Điều chỉnh đường dẫn import nếu cần
 import "../pages/user/dangnhap/bookedflight.scss";
+
 function BookedFlights() {
-  const [username, setUsername] = useState("");
+  const { userInfo } = useAuth(); // Lấy thông tin người dùng từ AuthContext
+  const [username, setUsername] = useState(userInfo || "");
   const [bookings, setBookings] = useState([]);
-  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Thêm state loading
+
+  // useEffect để tự động tải bookings khi component mount và có username
+  useEffect(() => {
+    if (username) {
+      fetchBookings();
+    }
+  }, [username]);
 
   const fetchBookings = async () => {
     if (!username) {
-      alert("Vui lòng nhập tên đăng nhập");
+      alert("Vui lòng đăng nhập");
       return;
     }
+
+    setIsLoading(true); // Bắt đầu loading
 
     try {
       const response = await fetch(
@@ -22,12 +34,16 @@ function BookedFlights() {
       const result = await response.json();
       if (result.error) {
         alert(result.error);
+        setBookings([]);
       } else {
         setBookings(result);
       }
     } catch (error) {
       console.error("Error fetching bookings:", error);
       alert("Không thể tải thông tin đặt vé");
+      setBookings([]);
+    } finally {
+      setIsLoading(false); // Kết thúc loading
     }
   };
 
@@ -63,21 +79,21 @@ function BookedFlights() {
       alert("Có lỗi xảy ra khi hủy vé");
     }
   };
+  if (isLoading) {
+    return (
+      <div className="loading-container" style={{ textAlign: "center" }}>
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="booked-flights-container">
       <div className="TitlePage">Tra Cứu Vé Đã Đặt</div>
-      <div className="username-search">
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Nhập tên đăng nhập"
-        />
-        <button onClick={fetchBookings}>Tra Cứu</button>
-      </div>
 
-      {bookings.length > 0 ? (
+      {isLoading ? (
+        <p>Đang tải thông tin...</p>
+      ) : bookings.length > 0 ? (
         <div className="bookings-list">
           {bookings.map((booking, index) => (
             <div key={index} className="booking-card">

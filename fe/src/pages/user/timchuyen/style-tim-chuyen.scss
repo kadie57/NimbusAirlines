@@ -65,7 +65,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 30px;
 }
-.App button {
+button {
   background-color: #4596d5;
   color: white;
   padding: 10px;
@@ -85,13 +85,12 @@ button:hover {
   color: white;
   padding: 3px 8px; /* Smaller padding for a smaller button */
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   top: 5px;
   // left: 10px;
   cursor: pointer;
-  align-self: center; /* Center the button */
-  //   margin: 5px 0 0 5px; /* Space above and below the swap button */
-  width: 25px; /* Allow the button to size based on content */
+  align-self: center;
+  width: 25px;
   height: 25px;
 }
 .swap-button:hover {

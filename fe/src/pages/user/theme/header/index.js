@@ -90,7 +90,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/sua-doi-thong-tin">Sửa đổi thông tin cá nhân</Link>
+                  <Link to="/sua-doi-thong-tin">Thông tin cá nhân</Link>
                   <Link to="/ve-da-dat">Vé đã đặt</Link>
                   <a>
                     <button
