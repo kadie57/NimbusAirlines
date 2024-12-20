@@ -4,15 +4,12 @@ import "./style.scss";
 const Baynoidia = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Chuyến bay nội địa Việt Nam</div>
-        <div class="luggage-banner-wrapper">
-          <img
-            src="img\Luggage_banner 1.png"
-            class="luggage-banner"
-            alt="Hành lý"
-          />
-        </div>
+
         <p>
           Để có một hành trình thuận lợi, hành khách lưu ý chuẩn bị đầy đủ giấy
           tờ cần thiết khi thực hiện chuyến bay nội địa Việt Nam.

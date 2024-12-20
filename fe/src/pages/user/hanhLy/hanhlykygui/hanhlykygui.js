@@ -4,15 +4,11 @@ import { ROUTERS } from "../../../../utils/router";
 const Hanhlykygui = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Hành lý ký gửi</div>
-        <div class="luggage-banner-wrapper">
-          <img
-            src="img\Luggage_banner 1.png"
-            class="luggage-banner"
-            alt="Hành lý"
-          />
-        </div>
 
         <nav>
           <ul>

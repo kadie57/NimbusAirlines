@@ -67,7 +67,7 @@ const Header = () => {
             </div>
           </div>
           <Link to="/tim-chuyen">Tìm chuyến</Link>
-          <Link to="/dat-ve">Đặt vé</Link>
+
           <Link to="/#tin">Tin tức</Link>
           <div class="has-dropdown">
             <Link to="#">Tài khoản</Link>

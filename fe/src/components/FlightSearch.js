@@ -77,22 +77,13 @@ function FlightSearch() {
         !searchDestination ||
         flight.destination.toLowerCase() === searchDestination;
 
+      // Only filter by departure date if a date is provided
       const matchesDepartureDate =
         !departureDate || flight.departureDate === departureDate;
 
-      // Kiểm tra chuyến bay một chiều hoặc khứ hồi
-      // const matchesOneWayFlight = tripType === "one-way" && !flight.returnDate;
-      // const matchesRoundTripFlight =
-      //   tripType === "round-trip" &&
-      //   (bookingStage === "outbound"
-      //     ? !flight.returnDate
-      //     : !!flight.returnDate);
+      // Ensure the flight matches the search criteria and is either Available or Scheduled
 
-      return (
-        matchesDeparture && matchesDestination
-        // matchesDepartureDate &&
-        // (tripType === "one-way" ? matchesOneWayFlight : matchesRoundTripFlight)
-      );
+      return matchesDeparture && matchesDestination && matchesDepartureDate;
     });
 
     setFilteredFlights(filtered.length > 0 ? filtered : []);

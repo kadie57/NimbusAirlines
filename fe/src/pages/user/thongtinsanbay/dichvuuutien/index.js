@@ -5,11 +5,12 @@ import "react-multi-carousel/lib/styles.css";
 const Dichvuuutien = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Dịch vụ ưu tiên</div>
-        <div class="luggage-banner-wrapper">
-          <img src="img\Luggage_banner 1.png" class="luggage-banner" />
-        </div>
+
         <p>
           Dịch vụ Ưu Tiên Hàng Không Cao Cấp là một đặc quyền được QAirline cung
           cấp tại các sân bay, mang lại trải nghiệm ưu việt và thuận tiện dành

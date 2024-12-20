@@ -205,46 +205,46 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
               <option value="Nhất">Hạng nhất</option>
             </select>
           </div>
+          <div className="ticket-prices">
+            <div>
+              <label>Trẻ em dưới 3 tuổi</label>
+              <input
+                type="number"
+                min="0"
+                value={passengerCounts.childUnder3}
+                onChange={(e) =>
+                  handlePassengerCountChange("childUnder3", e.target.value)
+                }
+              />
+              <span>Giá: {ticketPrices.childUnder3.toLocaleString()} VND</span>
+            </div>
 
-          <div>
-            <label>Trẻ em dưới 3 tuổi</label>
-            <input
-              type="number"
-              min="0"
-              value={passengerCounts.childUnder3}
-              onChange={(e) =>
-                handlePassengerCountChange("childUnder3", e.target.value)
-              }
-            />
-            <span>Giá: {ticketPrices.childUnder3.toLocaleString()} VND</span>
+            <div>
+              <label>Trẻ em trên 3 tuổi</label>
+              <input
+                type="number"
+                min="0"
+                value={passengerCounts.childOver3}
+                onChange={(e) =>
+                  handlePassengerCountChange("childOver3", e.target.value)
+                }
+              />
+              <span>Giá: {ticketPrices.childOver3.toLocaleString()} VND</span>
+            </div>
+
+            <div>
+              <label>Người lớn</label>
+              <input
+                type="number"
+                min="0"
+                value={passengerCounts.adult}
+                onChange={(e) =>
+                  handlePassengerCountChange("adult", e.target.value)
+                }
+              />
+              <span>Giá: {ticketPrices.adult.toLocaleString()} VND</span>
+            </div>
           </div>
-
-          <div>
-            <label>Trẻ em trên 3 tuổi</label>
-            <input
-              type="number"
-              min="0"
-              value={passengerCounts.childOver3}
-              onChange={(e) =>
-                handlePassengerCountChange("childOver3", e.target.value)
-              }
-            />
-            <span>Giá: {ticketPrices.childOver3.toLocaleString()} VND</span>
-          </div>
-
-          <div>
-            <label>Người lớn</label>
-            <input
-              type="number"
-              min="0"
-              value={passengerCounts.adult}
-              onChange={(e) =>
-                handlePassengerCountChange("adult", e.target.value)
-              }
-            />
-            <span>Giá: {ticketPrices.adult.toLocaleString()} VND</span>
-          </div>
-
           <div>
             <strong>Tổng giá: {totalPrice.toLocaleString()} VND</strong>
           </div>

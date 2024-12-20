@@ -7,6 +7,7 @@
 .App {
   max-width: 1200px;
   margin: auto;
+  top: -120px;
 }
 .App .container {
   gap: 20px;
@@ -40,8 +41,8 @@ h2 {
   padding: 10px;
 }
 .flight-search {
-  background: white;
-  padding: 20px;
+  background: #ffffffdb;
+  padding: 16px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -98,7 +99,7 @@ button:hover {
 }
 .results {
   margin-top: 20px;
-  width: 1185px;
+  // width: 1185px;
   // margin-right: 600px;
   // display: block; /* Change to block to show results initially */
   flex-direction: column;
@@ -110,7 +111,7 @@ button:hover {
   align-items: center; /* Center align items vertically */
   padding: 10px;
   border: 1px solid #ccc;
-  background-color: white;
+  background: url("../../../../public/img/Vector.png") no-repeat;
   margin: 10px 0;
   border-radius: 5px;
 }
@@ -191,25 +192,14 @@ button:hover {
 /* Add these styles to the existing CSS */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+  width: 1000px;
+  height: 500px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  // align-items: center;
+  align-items: center;
   z-index: 1000;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content h2 {
@@ -249,19 +239,23 @@ button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
   display: flex;
   // align-items: center;
   // justify-content: center;
   z-index: 1000;
+  padding: 0;
+  box-shadow: #000000;
 }
 
 .modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
+  width: 800px;
+
+  box-shadow: #000000;
 }
 .modal-content label {
   text-align: left;
@@ -270,7 +264,7 @@ button:hover {
 }
 .modal-content form > div {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   margin-bottom: 15px;
 }
 
@@ -283,9 +277,168 @@ button:hover {
 .modal-content input,
 .modal-content select {
   padding: 8px;
+  width: 100%;
+}
+.head-ticket {
+  display: block;
 }
 
-.modal-actions {
+.ticket-prices {
   display: flex;
   justify-content: space-between;
+  gap: 20px; /* Adds some space between the divs */
+  align-items: center; /* Vertically aligns the items */
+}
+
+.ticket-prices > div {
+  // flex: 1; /* Gives each div equal width */
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-prices > div label {
+  margin-bottom: 10px;
+}
+
+.ticket-prices > div input {
+  width: 230px; /* Consistent input width */
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.ticket-prices > div span {
+  font-weight: bold;
+  color: #333;
+}
+.modal-actions {
+  gap: 10px;
+  justify-content: center;
+}
+
+.flight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flight-ticket {
+  background: url("../../../../public/img/Vector.png") no-repeat center
+    center/cover;
+
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100px;
+}
+
+.ticket-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.flight-code span {
+  display: inline;
+  flex-direction: column;
+  font-weight: bold;
+  color: #000000;
+  background-color: #b4dcf6;
+  border-radius: 20px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+.flight-date {
+  font-size: 0.85em;
+  color: #000000;
+  margin-top: 4px;
+  background-color: #b4dcf6;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.flight-time {
+  flex-grow: 1;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.time-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.departure-time,
+.arrival-time {
+  font-size: 15px;
+
+  color: #2c3e50;
+  min-width: 100px; /* Đảm bảo độ rộng đồng nhất */
+}
+
+.flight-route {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 24px;
+}
+
+.route-city {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+
+.plane-icon {
+  color: #3498db;
+  font-size: 1.2em;
+}
+
+.duration {
+  font-size: 0.85em;
+  color: #7f8c8d;
+  margin-top: 8px;
+}
+
+.ticket-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 150px; /* Đảm bảo độ rộng đồng nhất cho phần giá */
+  padding-right: 40px;
+}
+
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.select-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.select-button:hover {
+  background-color: #2980b9;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
 }

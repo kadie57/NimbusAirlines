@@ -62,6 +62,7 @@ function BookedFlights() {
           booking_id: booking.booking_id,
           username: username,
           flightnumber: booking.flightnumber,
+     
         }),
       });
 
@@ -99,6 +100,9 @@ function BookedFlights() {
             <div key={index} className="booking-card">
               <div className="booking-details">
                 <p>
+                  <strong>ID:</strong> {booking.booking_id}
+                </p>
+                <p>
                   <strong>Số chuyến bay:</strong> {booking.flightnumber}
                 </p>
                 <p>
@@ -124,6 +128,9 @@ function BookedFlights() {
                 </p>
                 <p>
                   <strong>Thời gian đặt:</strong> {booking.booking_time}
+                </p>
+                <p>
+                  <strong>Trạng thái: </strong> {booking.status}
                 </p>
               </div>
               <div className="booking-actions">

@@ -4,17 +4,11 @@ import "./style.scss";
 const Baynuocngoai = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Chuyến bay Việt Nam đi quốc tế</div>
-        <div class="luggage-banner-wrapper">
-          <img
-            src="img/image-2.png"
-            class="luggage-banner"
-            alt="Hành lý"
-            width={"1000px"}
-            height={"375px"}
-          />
-        </div>
 
         <nav>
           <ul>

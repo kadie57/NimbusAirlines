@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPlane } from "react-icons/fa";
 
 function FlightResults({
   flights,
@@ -7,6 +8,44 @@ function FlightResults({
   bookingStage,
   onFlightSelect,
 }) {
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const formatTime = (timeStr) => {
+    // Convert 24h format to 12h format
+    const [hours, minutes] = timeStr.split(":");
+    const date = new Date();
+    date.setHours(parseInt(hours), parseInt(minutes));
+    return date
+      .toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .toLowerCase();
+  };
+
+  const calculateArrivalTime = (departureTime) => {
+    const [hours, minutes] = departureTime.split(":");
+    const date = new Date();
+    date.setHours(parseInt(hours), parseInt(minutes));
+    // Add 1 hour to departure time
+    date.setHours(date.getHours() + 1);
+    return date
+      .toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .toLowerCase();
+  };
+
   const getTitle = () => {
     if (tripType === "one-way") {
       return "Các chuyến bay phù hợp";
@@ -24,55 +63,50 @@ function FlightResults({
 
   return (
     <div className="results">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <h2>{getTitle()}</h2>
-      </div>
-
+      <h2>{getTitle()}</h2>
       <div className="result-count">{flights.length} chuyến bay</div>
 
       {flights.length === 0 && isSearchPerformed ? (
-        <div
-          style={{
-            textAlign: "center",
-            color: "#666",
-            padding: "20px",
-            backgroundColor: "#f4f4f4",
-            borderRadius: "5px",
-          }}
-        >
-          Không tìm thấy chuyến bay phù hợp
-        </div>
+        <div className="no-results">Không tìm thấy chuyến bay phù hợp</div>
       ) : (
         <div id="flight-list">
           {flights.map((flight, index) => (
-            <div key={flight.id || index} className="result-box">
-              <div>
-                <h3>{flight.flightNumber}</h3>
-                <p>
-                  {flight.departure} → {flight.destination}
-                </p>
-                <p>Thời gian bay: {flight.duration}</p>
-                <p>Ngày khởi hành: {flight.departureDate}</p>
-                <p>Giờ khởi hành: {flight.departureTime}</p>
-                {/* {flight.returnDate && <p>Ngày về: {flight.returnDate}</p>} */}
-                {/* <p>Hạng: {flight.class}</p> */}
-                {/* <p>Giá: {flight.price.toLocaleString()} VND</p> */}
-              </div>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-              >
-                <button
-                  className="buy-ticket-button"
-                  onClick={() => onFlightSelect(flight)}
-                >
-                  Chọn chuyến bay
-                </button>
+            <div key={flight.id || index} className="flight-ticket">
+              <div className="ticket-content">
+                <div className="head-ticket">
+                  <div className="flight-code">
+                    <span>{flight.flightNumber}</span>  
+                    <span>{formatDate(flight.departureDate)}</span>
+                  </div>
+
+                  <div className="flight-time">
+                    <div className="time-container">
+                      <div className="departure-time">
+                        {formatTime(flight.departureTime)}
+                      </div>
+                      <div className="flight-route">
+                        <span className="route-city">{flight.departure}</span>
+                        <FaPlane className="plane-icon" />
+                        <span className="route-city">{flight.destination}</span>
+                      </div>
+                      <div className="arrival-time">
+                        {calculateArrivalTime(flight.departureTime)}
+                      </div>
+                    </div>
+                    <div className="duration">{flight.duration}</div>
+                  </div>
+                </div>
+                <div className="ticket-price">
+                  <div className="price">
+                    {flight.price?.toLocaleString()} VND
+                  </div>
+                  <button
+                    className="select-button"
+                    onClick={() => onFlightSelect(flight)}
+                  >
+                    Chọn
+                  </button>
+                </div>
               </div>
             </div>
           ))}

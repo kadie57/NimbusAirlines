@@ -14,6 +14,14 @@
   border-radius: 10px;
 }
 
+.flight-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+  padding: 15px;
+}
 .flight-management button {
   display: block;
   margin: 15px auto 0;
@@ -67,7 +75,7 @@
   width: 100%;
 }
 
-.flight-card {
+.flight-management .flight-card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,22 +83,22 @@
   transition: transform 0.3s ease;
 }
 
-.flight-card:hover {
+.flight-management .flight-card:hover {
   transform: scale(1.02);
 }
 
-.flight-card-header {
+.flight-management .flight-card-header {
   background-color: #3498db;
   padding: 10px;
   text-align: center;
 }
 
-.flight-number {
+.flight-management .flight-number {
   font-weight: bold;
   color: #ffffff;
 }
 
-.flight-card-body {
+.flight-management .flight-card-body {
   padding: 15px;
 }
 

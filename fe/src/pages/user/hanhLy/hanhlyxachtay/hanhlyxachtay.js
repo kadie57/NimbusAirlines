@@ -5,12 +5,11 @@ import { ROUTERS } from "../../../../utils/router";
 const Hanhlyxachtay = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Hành lý xách tay</div>
-        <div class="luggage-banner-wrapper">
-          <img src="img\banner4.jpg" class="luggage-banner" alt="Hành lý" />
-        </div>
-
         <nav>
           <ul>
             <li>
@@ -48,7 +47,7 @@ const Hanhlyxachtay = () => {
               lý (mỗi kiện không quá 10kg) và 01 phụ kiện.
             </p>
             <img
-              src="img/Hạng_Thương_gia_hly.png"
+              src="img/hang-thuong-gia.png"
               class="luggage"
               alt="Hành lý"
               width={"50%"}
@@ -59,7 +58,7 @@ const Hanhlyxachtay = () => {
               01 phụ kiện.
             </p>
             <img
-              src="img/Hạng_phổ_thông_hly.png"
+              src="img/hang-pho-thong.png"
               class="luggage"
               alt="Hành lý"
               width={"50%"}

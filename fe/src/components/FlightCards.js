@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { FaClock, FaCalendarAlt, FaPlane } from "react-icons/fa";
 
 const FlightCards = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFlight, setSelectedFlight] = useState(null);
+
+  // Array of background images
+  const backgroundImages = [
+    "./img/denys-nevozhai-guNIjIuUcgY-unsplash.jpg",
+    "./img/massimiliano-donghi-JXsxH2shRgY-unsplash.jpg",
+    "/img/ian-dooley-hpTH5b6mo2s-unsplash.jpg",
+    "./img/annie-spratt-3bh3elC0D7M-unsplash.jpg",
+  ];
 
   useEffect(() => {
     const fetchRandomFlights = async () => {
@@ -15,10 +24,10 @@ const FlightCards = () => {
         }
         const allFlights = await response.json();
 
-        // Lấy ngẫu nhiên 8 chuyến bay
+        // Lấy ngẫu nhiên 4 chuyến bay
         const randomFlights = allFlights
           .sort(() => 0.5 - Math.random())
-          .slice(0, 8);
+          .slice(0, 4);
 
         setFlights(randomFlights);
         setLoading(false);
@@ -57,41 +66,49 @@ const FlightCards = () => {
 
   return (
     <div className="flight-cards-container">
-      <div className="title">Nhiều người cùng chọn</div>
+      <div className="title">Chuyến đi phổ biến</div>
       <div className="cards-grid">
         {flights.map((flight, index) => (
           <div
             key={index}
             className="flight-card"
             onClick={() => openFlightDetails(flight)}
+            style={{
+              backgroundImage: `url(${
+                backgroundImages[index % backgroundImages.length]
+              })`,
+            }}
           >
             <div className="flight-card-header">
-              <span className="flight-number">{flight.flightNumber}</span>
+              <div className="flight-detail">
+                <span style={{ fontSize: "16px" }}>Từ</span>
+                <br />
+                {flight.departure}
+                <br />
+                <span style={{ fontSize: "16px" }}>đến </span> <br />
+                {flight.destination}
+              </div>
             </div>
 
             <div className="flight-card-body">
               <div className="flight-detail">
-                <i className="icon icon-time"></i>
-                <div>{flight.departureTime}</div>
+                <div>
+                  <FaClock /> {flight.departureTime}
+                </div>
               </div>
 
               <div className="flight-detail">
-                <i className="icon icon-calendar"></i>
-                <span>{flight.departureDate}</span>
+                <div>
+                  <FaCalendarAlt /> {flight.departureDate}
+                </div>
               </div>
 
               <div className="flight-detail">
-                <i className="icon icon-location"></i>
-                <span>
-                  {flight.departure} → {flight.destination}
-                </span>
-              </div>
-
-              <div className="flight-detail">
-                <i className="icon icon-status"></i>
-                <span className="flight-price">
+                <div className="flight-price">
+                  <FaPlane />
+                  {"       "}
                   {flight.returnDate === null ? "Một chiều" : "Khứ hồi"}
-                </span>
+                </div>
               </div>
             </div>
           </div>
@@ -112,9 +129,7 @@ const FlightCards = () => {
               <div className="detail-item">
                 <strong>Số chuyến bay:</strong> {selectedFlight.flightNumber}
               </div>
-              <div className="detail-item">
-                <strong>Hạng:</strong> {selectedFlight.class}
-              </div>
+
               <div className="detail-item">
                 <strong>Điểm khởi hành:</strong> {selectedFlight.departure}
               </div>
@@ -127,10 +142,6 @@ const FlightCards = () => {
               <div className="detail-item">
                 <strong>Giờ khởi hành:</strong> {selectedFlight.departureTime}
               </div>
-              {/* <div className="detail-item">
-                <strong>Loại vé:</strong>{" "}
-                {selectedFlight.returnDate === null ? "Một chiều" : "Khứ hồi"}
-              </div> */}
               {selectedFlight.returnDate && (
                 <>
                   <div className="detail-item">

@@ -7,16 +7,13 @@ import "./style-tim-chuyen.scss";
 function App() {
   return (
     <>
-      <div className="App">
-        <div className="container">
-          <div className="TitlePage">Tìm chuyến bay</div>
-          <div className="banner-tim-chuyen">
-            <img
-              src="img\bg.jpg"
-              class="banner-tim-chuyen"
-              alt="Tìm chuyến bay"
-            />
-          </div>
+      {" "}
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
+      <div id="tim-chuyen">
+        <div className="App">
+          <div className="container"></div>
           <FlightSearch />
         </div>
       </div>

@@ -4,15 +4,11 @@ import "./style.scss";
 const tttructiep = () => {
   return (
     <>
+      <div class="luggage-banner-wrapper">
+        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+      </div>
       <div class="content">
         <div class="TitlePage">Làm thủ tục tại sân bay</div>
-        <div class="luggage-banner-wrapper">
-          <img
-            src="img\Luggage_banner 1.png"
-            class="luggage-banner"
-            alt="Hành lý"
-          />
-        </div>
 
         <p>
           QAirline cam kết vận chuyển hành lý đến điểm đến một cách an toàn và
