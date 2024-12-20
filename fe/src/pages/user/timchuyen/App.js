@@ -9,7 +9,7 @@ function App() {
     <>
       {" "}
       <div class="luggage-banner-wrapper">
-        <img src="img\Banner_2.png" class="luggage-banner" alt="Hành lý" />
+        <img src="img\banner1.jpg" class="luggage-banner" alt="Hành lý" />
       </div>
       <div id="tim-chuyen">
         <div className="App">

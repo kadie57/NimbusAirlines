@@ -89,10 +89,10 @@ const Phongkhachthuonggia = () => {
         </section>
 
         <section id="eligibility">
-          <div class="heading-strong">
+          <div className="heading-strong">
             Hành khách được sử dụng phòng khách miễn phí
           </div>
-          <div class="frame-2">
+          <div className="frame-2">
             <p>
               Hành khách thực hiện các chuyến bay do QAirline hoặc các hãng hàng
               không trong liên minh SkyTeam khai thác được sử dụng miễn phí
@@ -136,10 +136,10 @@ const Phongkhachthuonggia = () => {
         </section>
 
         <section id="voucher-purchase">
-          <div class="heading-strong">
+          <div className="heading-strong">
             Mua Voucher sử dụng Phòng khách Bông Sen
           </div>
-          <div class="frame-2">
+          <div className="frame-2">
             <p>
               Hành khách có thể mua voucher và tận hưởng các tiện ích của Phòng
               khách Bông Sen. Để trải nghiệm trọn vẹn hơn, hành khách lưu ý:
@@ -158,8 +158,8 @@ const Phongkhachthuonggia = () => {
         </section>
 
         <section id="documents">
-          <div class="heading-strong">Giấy tờ cần chuẩn bị</div>
-          <div class="frame-2">
+          <div className="heading-strong">Giấy tờ cần chuẩn bị</div>
+          <div className="frame-2">
             <p>
               Hành khách xuất trình giấy tờ tùy thân, thẻ lên tàu bay (boarding
               pass) và thẻ hội viên (nếu là hội viên Bông Sen Vàng hoặc SkyTeam)
@@ -169,8 +169,8 @@ const Phongkhachthuonggia = () => {
         </section>
 
         <section id="lounge-amenities">
-          <div class="heading-strong">Tiện ích của phòng khách</div>
-          <div class="frame-2">
+          <div className="heading-strong">Tiện ích của phòng khách</div>
+          <div className="frame-2">
             <ul>
               <li>
                 <p>
@@ -206,8 +206,8 @@ const Phongkhachthuonggia = () => {
         </section>
 
         <section id="important-notes">
-          <div class="heading-strong">Thông tin cần lưu ý</div>
-          <div class="frame-2">
+          <div className="heading-strong">Thông tin cần lưu ý</div>
+          <div className="frame-2">
             <p>
               Dịch vụ Phòng khách Bông Sen/Phòng khách Thương gia không bao gồm
               các dịch vụ ưu tiên SkyPriority cũng như không bao gồm dịch vụ đưa

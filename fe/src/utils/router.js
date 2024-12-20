@@ -25,5 +25,6 @@ export const ROUTERS = {
     DASHBOARD: "",
     FLIGHTMANAGEMENT: "flight-management",
     PLANEMANAGEMENT: "plane-management",
+    NEWSMANAGEMENT: "news-management",
   },
 };

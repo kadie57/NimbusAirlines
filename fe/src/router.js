@@ -24,6 +24,7 @@ import AdminLayout from "./pages/admin/theme/adminLayout"; // Add this line
 import BookedFlights from "./components/BookedFlight";
 import FlightManagement from "./pages/admin/FlightManagement";
 import PlaneManagement from "./pages/admin/PlaneManagement";
+import Forum from "./pages/admin/NewsManagement";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -141,6 +142,10 @@ const renderAdminRouter = () => {
     {
       path: ROUTERS.ADMIN.PLANEMANAGEMENT,
       component: <PlaneManagement />,
+    },
+    {
+      path: ROUTERS.ADMIN.NEWSMANAGEMENT,
+      component: <Forum />,
     },
     // {
     //   path: ROUTERS.ADMIN.USERS,

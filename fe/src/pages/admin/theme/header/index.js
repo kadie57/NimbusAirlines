@@ -7,13 +7,18 @@ const Header = () => {
     <>
       <div className="headerAdmin">
         <div className="sidebar">
-          <div className="titlemenu">QAIRLINES</div>
+          <img
+            src="../img/Nimbus.png"
+            alt="logo 'QAirlines'"
+            width={"200px"}
+            style={{ marginBottom: "30px" }}
+          />
           <ul>
             <li>
-              <a href="#">
+              <Link to={"/admin/news-management"}>
                 <i className="fas fa-tachometer-alt"> </i>
                 Đăng tin tức
-              </a>
+              </Link>
             </li>
             <li>
               <Link to="/admin/plane-management">
@@ -29,19 +34,19 @@ const Header = () => {
             </li>
 
             <li>
-              <a href="#">
+              {/* <a href="#">
                 <i className="fas fa-shopping-cart"> </i>
                 Thay đổi giờ bay
-              </a>
+              </a> */}
             </li>
           </ul>
         </div>
         <div className="main-content">
           <div className="header">
             <h1>Dashboard</h1>
-            <div className="search-bar">
+            {/* <div className="search-bar">
               <input placeholder="Search here" type="text" />
-            </div>
+            </div> */}
             <div className="user-profile">
               <img
                 alt="User profile picture"
@@ -55,7 +60,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          Xem và thống kê đặt vé của khách hàng
+          {/* Xem và thống kê đặt vé của khách hàng */}
         </div>
       </div>
     </>

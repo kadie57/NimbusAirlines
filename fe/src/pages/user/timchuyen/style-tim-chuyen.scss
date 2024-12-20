@@ -371,6 +371,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   gap: 24px;
+  margin-left: 120px;
 }
 
 .departure-time,
@@ -403,7 +404,8 @@ button:hover {
 .duration {
   font-size: 0.85em;
   color: #7f8c8d;
-  margin-top: 8px;
+  align-items: center;
+  margin-left: 110px;
 }
 
 .ticket-price {

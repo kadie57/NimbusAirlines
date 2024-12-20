@@ -75,7 +75,7 @@ function FlightResults({
               <div className="ticket-content">
                 <div className="head-ticket">
                   <div className="flight-code">
-                    <span>{flight.flightNumber}</span>  
+                    <span>{flight.flightNumber}</span>
                     <span>{formatDate(flight.departureDate)}</span>
                   </div>
 
@@ -91,7 +91,7 @@ function FlightResults({
                       </div>
                       <div className="arrival-time">
                         {calculateArrivalTime(flight.departureTime)}
-                      </div>
+                      </div>{" "}
                     </div>
                     <div className="duration">{flight.duration}</div>
                   </div>

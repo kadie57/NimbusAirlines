@@ -1,0 +1,108 @@
+.forum {
+  width: 1200px;
+  padding: 20px;
+  margin-left: 260px;
+}
+
+.forum-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #24d0ff0b;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.forum .threads-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.forum .thread-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.forum .thread-card:hover {
+  transform: scale(1.02);
+}
+
+.forum .thread-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.forum .thread-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.forum .posts-container {
+  margin-top: 30px;
+}
+
+.forum .post-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+.forum .post-content {
+  margin: 10px 0;
+}
+
+.forum .form-group {
+  margin-bottom: 15px;
+}
+
+.forum .form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.forum .form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.forum .form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.forum button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.forum button:hover {
+  background-color: #375a88;
+}
+
+.forum button[type="submit"] {
+  background-color: #4a90e2;
+}
+
+.forum button[type="submit"]:hover {
+  background-color: #357abd;
+}
