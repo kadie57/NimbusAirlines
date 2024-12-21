@@ -22,7 +22,7 @@ export const ROUTERS = {
     VEDADAT: "ve-da-dat",
     AMTHUC: "am-thuc-thuong-gia",
     TICHLUYDAM: "tich-luy-dam-bay",
-    KHUYENMAI: "khuyen-mai-2025",
+
   },
   ADMIN: {
     DASHBOARD: "",

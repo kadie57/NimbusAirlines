@@ -97,8 +97,8 @@ const Dangnhap = () => {
             />
             <i className="lock"></i>
           </div>
-          <div className="input-group">
-            <label htmlFor="role">Bạn là</label>
+          <div className="input-group1">
+            <label htmlFor="role">Bạn là:</label>
             <select
               id="role"
               name="role"
@@ -110,6 +110,7 @@ const Dangnhap = () => {
               <option value="admin">Quản trị viên</option>
             </select>
           </div>
+
           <button type="submit" className="login-btn">
             Đăng nhập
           </button>

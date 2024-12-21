@@ -116,10 +116,12 @@ h2 {
   width: 25px;
   height: 25px;
 }
-// .lock {
-//   background-image: url("../../../../public/img/lock.png");
-//   background-size: cover;
-//   width: 30px;
-//   height: 25px;
-//   right: 2px;
-// }
+.login-container .input-group1 {
+  display: flex;
+  margin-top: 10px;
+}
+.login-container select {
+  padding: 5px;
+  margin-left: 15px;
+  top: -5px;
+}

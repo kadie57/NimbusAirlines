@@ -11,13 +11,13 @@ import Tructuyen from "./pages/user/thutuc/tructuyen";
 import Baynoidia from "./pages/user/camnangbay/baynoidia";
 import Baynuocngoai from "./pages/user/camnangbay/baynuocngoai";
 import Timchuyen from "./pages/user/timchuyen/App";
-import Datve from "./pages/user/datve";
+
 import Dangnhap from "./pages/user/dangnhap";
 import TinTuc from "./pages/user/tintuc";
 import DangKy from "./pages/user/dangky";
 import Dichvuuutien from "./pages/user/thongtinsanbay/dichvuuutien";
 import Phongkhachthuonggia from "./pages/user/thongtinsanbay/phongkhachthuonggia";
-import Profile from "./components/UserProfile";
+
 import Dashboard from "./pages/admin/Dashboard";
 
 import AdminLayout from "./pages/admin/theme/adminLayout"; // Add this line
@@ -28,6 +28,7 @@ import PlaneManagement from "./pages/admin/PlaneManagement";
 import Forum from "./pages/admin/NewsManagement";
 import Amthucthuonggia from "./pages/user/camnangbay/amthucthuonggia";
 import Tichluydam from "./pages/user/tichluydam";
+import AccountManagement from "./pages/user/AccountManage/UserProfile";
 
 const AdminRoute = ({ children }) => {
   const { isLoggedIn, userRole } = useAuth();
@@ -85,10 +86,7 @@ const renderUserRouter = () => {
       path: ROUTERS.USER.TIMCHUYEN,
       component: <Timchuyen />,
     },
-    {
-      path: ROUTERS.USER.DATVE,
-      component: <Datve />,
-    },
+
     {
       path: ROUTERS.USER.DANGNHAP,
       component: <Dangnhap />,
@@ -111,7 +109,7 @@ const renderUserRouter = () => {
     },
     {
       path: ROUTERS.USER.PROFILE,
-      component: <Profile />,
+      component: <AccountManagement />,
     },
     {
       path: ROUTERS.USER.VEDADAT,

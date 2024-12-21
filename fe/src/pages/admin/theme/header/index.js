@@ -7,12 +7,15 @@ const Header = () => {
     <>
       <div className="headerAdmin">
         <div className="sidebar">
-          <img
-            src="../img/Nimbus.png"
-            alt="logo 'QAirlines'"
-            width={"200px"}
-            style={{ marginBottom: "30px" }}
-          />
+          <Link to="/">
+            {" "}
+            <img
+              src="../img/Nimbus.png"
+              alt="logo 'QAirlines'"
+              width={"200px"}
+              style={{ marginBottom: "30px" }}
+            />
+          </Link>
           <ul>
             <li>
               <Link to={"/admin/news-management"}>
@@ -47,18 +50,6 @@ const Header = () => {
             {/* <div className="search-bar">
               <input placeholder="Search here" type="text" />
             </div> */}
-            <div className="user-profile">
-              <img
-                alt="User profile picture"
-                height="40"
-                src="https://storage.googleapis.com/a1aa/image/KfkaUCcPGgQbS6VSDhC5gWtNxRauKgSZYUg54VPRD6rC5Q9JA.jpg"
-                width="40"
-              />
-              <div className="user-info">
-                <p className="name">John Doe</p>
-                <p className="role">Super admin</p>
-              </div>
-            </div>
           </div>
           {/* Xem và thống kê đặt vé của khách hàng */}
         </div>
