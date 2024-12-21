@@ -24,7 +24,7 @@ const Header = () => {
     <>
       <div class="navbar">
         <Link to="/" className="logo">
-          <img src="img/Nimbus.png" alt="logo 'QAirlines'" />
+          <img src="img/Nimbus.png" alt="logo 'QAirlines'" width={"375px"} />
         </Link>
         <div class="nav-links">
           <div class="has-dropdown">

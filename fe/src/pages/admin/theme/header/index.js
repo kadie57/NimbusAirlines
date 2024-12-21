@@ -12,8 +12,8 @@ const Header = () => {
             <img
               src="../img/Nimbus.png"
               alt="logo 'QAirlines'"
-              width={"200px"}
-              style={{ marginBottom: "30px" }}
+              width={"280px"}
+              style={{ marginBottom: "30px", marginLeft: "-55px" }}
             />
           </Link>
           <ul>
