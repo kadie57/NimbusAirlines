@@ -11,6 +11,7 @@ const Dangnhap = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    role: "user", // Giá trị mặc định là người dùng
   });
 
   const [message, setMessage] = useState("");
@@ -23,39 +24,15 @@ const Dangnhap = () => {
     }));
   };
 
-  const checkAdminAccount = async (username, password) => {
-    try {
-      const response = await fetch("http://54.200.166.229/admin_accounts", {
-        method: "GET",
-      });
-
-      if (response.ok) {
-        const adminAccounts = await response.json();
-        // Kiểm tra xem tài khoản có trong danh sách admin không
-        return adminAccounts.some(
-          (account) =>
-            account.username === username && account.password === password
-        );
-      }
-      return false;
-    } catch (error) {
-      console.error("Error checking admin account:", error);
-      return false;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Kiểm tra xem có phải tài khoản admin không
-      const isAdmin = await checkAdminAccount(
-        formData.username,
-        formData.password
-      );
-
-      // Endpoint đăng nhập tương ứng
-      const loginEndpoint = "http://54.200.166.229/login";
+      // Chọn endpoint dựa trên role
+      const loginEndpoint =
+        formData.role === "admin"
+          ? "http://54.200.166.229/admin_login"
+          : "http://54.200.166.229/login";
 
       const response = await fetch(loginEndpoint, {
         method: "POST",
@@ -71,17 +48,11 @@ const Dangnhap = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Lưu thông tin người dùng với role tương ứng
-        login(
-          formData.username,
-          data.token,
-          isAdmin ? "admin" : "user",
-          formData.password
-        );
+        login(formData.username, data.token, formData.role, formData.password);
         setMessage("Đăng nhập thành công");
 
         // Chuyển hướng dựa trên role
-        if (isAdmin) {
+        if (formData.role === "admin") {
           navigate("/admin", { replace: true });
         } else {
           navigate("/", { replace: true });
@@ -125,6 +96,19 @@ const Dangnhap = () => {
               required
             />
             <i className="lock"></i>
+          </div>
+          <div className="input-group">
+            <label htmlFor="role">Bạn là</label>
+            <select
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="user">Người dùng</option>
+              <option value="admin">Quản trị viên</option>
+            </select>
           </div>
           <button type="submit" className="login-btn">
             Đăng nhập

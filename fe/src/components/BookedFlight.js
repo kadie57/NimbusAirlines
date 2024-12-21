@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "./Authentication"; // Điều chỉnh đường dẫn import nếu cần
+import { useAuth } from "./Authentication";
 import "../pages/user/dangnhap/bookedflight.scss";
 
 function BookedFlights() {
-  const { userInfo } = useAuth(); // Lấy thông tin người dùng từ AuthContext
+  const { userInfo } = useAuth();
   const [username, setUsername] = useState(userInfo || "");
   const [bookings, setBookings] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Thêm state loading
+  const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect để tự động tải bookings khi component mount và có username
   useEffect(() => {
     if (username) {
       fetchBookings();
@@ -21,7 +20,7 @@ function BookedFlights() {
       return;
     }
 
-    setIsLoading(true); // Bắt đầu loading
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -43,12 +42,20 @@ function BookedFlights() {
       alert("Không thể tải thông tin đặt vé");
       setBookings([]);
     } finally {
-      setIsLoading(false); // Kết thúc loading
+      setIsLoading(false);
     }
   };
 
   const handleCancelBooking = async (booking) => {
     if (!window.confirm("Bạn có chắc chắn muốn hủy đặt vé này?")) {
+      return;
+    }
+
+    // Lấy password từ localStorage
+    const storedPassword = localStorage.getItem("password");
+
+    if (!storedPassword) {
+      alert("Không tìm thấy thông tin đăng nhập. Vui lòng đăng nhập lại.");
       return;
     }
 
@@ -61,6 +68,7 @@ function BookedFlights() {
         body: JSON.stringify({
           booking_id: booking.booking_id,
           username: username,
+          password: storedPassword, // Thêm password vào request
           flightnumber: booking.flightnumber,
         }),
       });
@@ -69,7 +77,6 @@ function BookedFlights() {
 
       if (result.message) {
         alert(result.message);
-        // Refresh bookings after successful cancellation
         fetchBookings();
       } else {
         alert(result.error || "Hủy vé thất bại");
@@ -79,6 +86,7 @@ function BookedFlights() {
       alert("Có lỗi xảy ra khi hủy vé");
     }
   };
+
   if (isLoading) {
     return (
       <div className="loading-container" style={{ textAlign: "center" }}>
@@ -89,7 +97,7 @@ function BookedFlights() {
 
   return (
     <div className="booked-flights-container">
-      <div className="TitlePage">Tra Cứu Vé Đã Đặt</div>
+      <div className="TitlePage">Chuyến bay của tôi</div>
 
       {isLoading ? (
         <p>Đang tải thông tin...</p>
