@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
+import { color } from "chart.js/helpers";
 
 const Header = () => {
   return (
@@ -45,12 +46,15 @@ const Header = () => {
           </ul>
         </div>
         <div className="main-content">
-          <div className="header">
-            <h1>Dashboard</h1>
-            {/* <div className="search-bar">
+          <Link to="/admin" style={{ textDecoration: "none" }}>
+            <div className="header">
+              <h1 style={{ color: "#375a88" }}>Dashboard</h1>
+
+              {/* <div className="search-bar">
               <input placeholder="Search here" type="text" />
             </div> */}
-          </div>
+            </div>
+          </Link>
           {/* Xem và thống kê đặt vé của khách hàng */}
         </div>
       </div>

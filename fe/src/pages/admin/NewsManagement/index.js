@@ -181,10 +181,7 @@ const Forum = () => {
                 <button
                   onClick={() => viewPosts(thread.thread_id, thread.title)}
                 >
-                 Xem nhóm tin
-                </button>
-                <button onClick={() => handleDeleteThread(thread.thread_id)}>
-                  Xóa nhóm tin
+                  Xem nhóm tin
                 </button>
               </div>
             </div>
@@ -232,7 +229,7 @@ const Forum = () => {
                               togglePost(post.post_id, post.content, e.target)
                             }
                           >
-                           xem thêm
+                            xem thêm
                           </button>
                         </>
                       ) : (
