@@ -6,13 +6,13 @@ import "./style.css";
 const AccountManagement = () => {
   const { userInfo: username, logout } = useAuth();
   const navigate = useNavigate();
-  const password = localStorage.getItem("password");
+  const storedPassword = localStorage.getItem("password");
 
   const [accountDetails, setAccountDetails] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
-    password: "",
+    password: "", // Để trống cho người dùng nhập
     newusername: "",
     email: "",
     realname: "",
@@ -24,15 +24,14 @@ const AccountManagement = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    if (username && password) {
+    if (username && storedPassword) {
       setFormData((prev) => ({
         ...prev,
-        username,
-        password,
+        username, // Chỉ set username, không set password
       }));
       fetchAccountDetails();
     }
-  }, [username, password]);
+  }, [username, storedPassword]);
 
   const fetchAccountDetails = async () => {
     try {
@@ -43,7 +42,7 @@ const AccountManagement = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ password }),
+          body: JSON.stringify({ password: storedPassword }),
         }
       );
 
@@ -60,6 +59,7 @@ const AccountManagement = () => {
         realname: data[0].realname || "",
         birthdate: data[0].birthdate || "",
         gender: data[0].gender || "",
+        password: "", // Đảm bảo password luôn trống khi bắt đầu chỉnh sửa
         newpassword: "",
       }));
       setError("");
@@ -81,6 +81,12 @@ const AccountManagement = () => {
     setError("");
     setSuccessMessage("");
 
+    // Kiểm tra mật khẩu hiện tại
+    if (formData.password !== storedPassword) {
+      setError("Mật khẩu hiện tại không chính xác");
+      return; // Dừng việc thực thi tiếp
+    }
+
     try {
       const response = await fetch(
         `http://54.200.166.229/modify_accounts/${formData.username}`,
@@ -97,11 +103,10 @@ const AccountManagement = () => {
         setSuccessMessage("Cập nhật thông tin thành công! Đang đăng xuất...");
         setIsEditing(false);
 
-        // Đợi 2 giây để người dùng đọc thông báo thành công
         setTimeout(() => {
-          // Đăng xuất hoàn toàn và chuyển về trang đăng nhập
           logout();
           navigate("/dang-nhap");
+          window.location.reload();
         }, 2000);
       } else {
         setError(result.error || "Không thể cập nhật thông tin");
@@ -111,7 +116,7 @@ const AccountManagement = () => {
     }
   };
 
-  if (!username || !password) {
+  if (!username || !storedPassword) {
     return (
       <div className="account-management">
         Vui lòng đăng nhập để xem thông tin tài khoản
@@ -156,7 +161,14 @@ const AccountManagement = () => {
               </div>
               <button
                 className="btn btn-primary"
-                onClick={() => setIsEditing(true)}
+                onClick={() => {
+                  setIsEditing(true);
+                  setError(""); // Xóa error khi bắt đầu chỉnh sửa
+                  setFormData((prev) => ({
+                    ...prev,
+                    password: "", // Reset password field khi bắt đầu chỉnh sửa
+                  }));
+                }}
               >
                 Chỉnh sửa thông tin
               </button>
@@ -174,6 +186,7 @@ const AccountManagement = () => {
                   value={formData.username}
                   onChange={handleInputChange}
                   required
+                  readOnly // Không cho phép sửa username hiện tại
                 />
               </div>
 
@@ -183,9 +196,9 @@ const AccountManagement = () => {
                   type="password"
                   id="password"
                   name="password"
-                  value={formData.password}
                   onChange={handleInputChange}
                   required
+                  placeholder="Nhập mật khẩu hiện tại của bạn"
                 />
               </div>
 
@@ -255,6 +268,7 @@ const AccountManagement = () => {
                   name="newpassword"
                   value={formData.newpassword}
                   onChange={handleInputChange}
+                  placeholder="Để trống nếu không muốn đổi mật khẩu"
                 />
               </div>
 
