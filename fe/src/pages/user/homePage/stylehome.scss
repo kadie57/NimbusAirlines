@@ -11,11 +11,16 @@ html {
   --text-color: #;
   --background-color: #f4f4f4;
 }
+.homepage hr {
+  width: 1200px;
+  margin: auto;
+}
 
 .flight-cards-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0px;
+  margin-bottom: 50px;
 }
 
 .page-title {

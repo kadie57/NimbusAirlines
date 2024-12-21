@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./styletin.scss";
@@ -34,13 +35,16 @@ const TinTuc = () => {
               src="https://storage.googleapis.com/a1aa/image/OZm8eff9FHI5CJpbgUMO5r5at8Ikd6GfguCczXazZmCtzljPB.jpg"
               width="300"
             />
-            <div class="card-content">
-              <div class="card-title">Làm thủ tục trực tuyến</div>
-              <div class="card-description">
-                Chủ động làm thủ tục trên website hoặc ứng dụng di động của
-                Vietnam Airlines.
+            <a href="tt-truc-tuyen">
+              {" "}
+              <div class="card-content">
+                <div class="card-title">Làm thủ tục trực tuyến</div>
+                <div class="card-description">
+                  Chủ động làm thủ tục trên website hoặc ứng dụng di động của
+                  Vietnam Airlines.
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="card">
             <img
@@ -49,13 +53,15 @@ const TinTuc = () => {
               src="https://storage.googleapis.com/a1aa/image/ve4BPJI5Uv1QCC01OAtppZIKnxRISeSI2eDqsNew3nw6zljPB.jpg"
               width="300"
             />
-            <div class="card-content">
-              <div class="card-title">Phòng khách Thương gia</div>
-              <div class="card-description">
-                Trải nghiệm phòng chờ sang trọng, yên tĩnh và đầy đủ tiện nghi
-                trước giờ khởi hành.
-              </div>
-            </div>
+            <a href="phong-khach-thuong-gia">
+              <div class="card-content">
+                <div class="card-title">Phòng khách Thương gia</div>
+                <div class="card-description">
+                  Trải nghiệm phòng chờ sang trọng, yên tĩnh và đầy đủ tiện nghi
+                  trước giờ khởi hành.
+                </div>
+              </div>{" "}
+            </a>
           </div>
           <div class="card">
             <img
@@ -64,12 +70,14 @@ const TinTuc = () => {
               src="https://storage.googleapis.com/a1aa/image/8D8lww6hQX7ONxNrTpc8tHPhBULmOnVzA4otjFfdnCPec54TA.jpg"
               width="300"
             />
-            <div class="card-content">
-              <div class="card-title">Ẩm thực hạng Thương gia</div>
-              <div class="card-description">
-                Trải nghiệm “ẩm thực trên mây” 5 sao.
+            <a href="am-thuc-thuong-gia">
+              <div class="card-content">
+                <div class="card-title">Ẩm thực hạng Thương gia</div>
+                <div class="card-description">
+                  Trải nghiệm “ẩm thực trên mây” 5 sao.
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="card">
             <img
@@ -78,39 +86,45 @@ const TinTuc = () => {
               src="img/banner5.jpg"
               width="300"
             />
-            <div class="card-content">
-              <div class="card-title">Tích lũy dặm trên chuyến bay</div>
-              <div class="card-description">
-                Trải nghiệm “ẩm thực trên mây” 5 sao.
+            <a href="tich-luy-dam-bay">
+              <div class="card-content">
+                <div class="card-title">Tích lũy dặm trên chuyến bay</div>
+                <div class="card-description">
+                  Trải nghiệm “ẩm thực trên mây” 5 sao.
+                </div>
+              </div>
+            </a>
+          </div>
+          <a href="khuyen-mai-2025">
+            <div class="card">
+              <img
+                alt="A meal served in business class"
+                height="200"
+                src="img/bay-tet.jpg"
+                width="300"
+              />
+              <div class="card-content">
+                <div class="card-title">Khuyến mãi bay Tết 2025</div>
+                <div class="card-description">Nhiều ưu đãi hấp dẫn</div>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <img
-              alt="A meal served in business class"
-              height="200"
-              src="img/bay-tet.jpg"
-              width="300"
-            />
-            <div class="card-content">
-              <div class="card-title">Khuyến mãi bay Tết 2025</div>
-              <div class="card-description">Nhiều ưu đãi hấp dẫn</div>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              alt="A meal served in business class"
-              height="200"
-              src="img/hanh-ly.jpg"
-              width="300"
-            />
-            <div class="card-content">
-              <div class="card-title">Hành lý đặc biệt</div>
-              <div class="card-description">
-                Tìm hiểu về các loại hành lý đặc biệt
+          </a>
+          <a href="hanh-ly-dac-biet">
+            <div class="card">
+              <img
+                alt="A meal served in business class"
+                height="200"
+                src="img/hanh-ly.jpg"
+                width="300"
+              />
+              <div class="card-content">
+                <div class="card-title">Hành lý đặc biệt</div>
+                <div class="card-description">
+                  Tìm hiểu về các loại hành lý đặc biệt
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </Carousel>
       </div>
 

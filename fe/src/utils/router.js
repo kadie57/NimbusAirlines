@@ -20,6 +20,9 @@ export const ROUTERS = {
     PHONGKHACHTHUONGGIA: "phong-khach-thuong-gia",
     PROFILE: "sua-doi-thong-tin",
     VEDADAT: "ve-da-dat",
+    AMTHUC: "am-thuc-thuong-gia",
+    TICHLUYDAM: "tich-luy-dam-bay",
+    KHUYENMAI: "khuyen-mai-2025",
   },
   ADMIN: {
     DASHBOARD: "",

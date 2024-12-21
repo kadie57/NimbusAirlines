@@ -14,6 +14,7 @@ const HomePage = () => {
         <ScrollToHash />
         <TinNgan />
         <FlightCards />
+        <hr />
         <Tintuc />
       </div>
     </>

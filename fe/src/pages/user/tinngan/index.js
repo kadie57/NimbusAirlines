@@ -41,38 +41,44 @@ const TinNgan = () => {
 
   return (
     <>
-      <div className="news-ticker">
-        <div className="ticker-container">
-          <div className="news-icon">
-            <FaNewspaper />
-            Tin tức
-          </div>
-          <div className="news-title-container">
-            <div className="news-title">
-              {news.map((post, index) => (
-                <a key={index} onClick={() => handleShowPost(post)}>
-                  {post.post_title}
-                </a>
-              ))}
+      <div id="tin-tuc-ngan">
+        <div className="news-ticker">
+          <div className="ticker-container">
+            <div className="news-icon">
+              <FaNewspaper />
+              Tin tức
+            </div>
+            <div className="news-title-container">
+              <div className="news-title">
+                {news.map((post, index) => (
+                  <a key={index} onClick={() => handleShowPost(post)}>
+                    {post.post_title}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div
-        className={`news-modal ${showModal ? "show" : ""}`}
-        onClick={handleModalClick}
-      >
-        {selectedPost && (
-          <div className="news-modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2 className="news-modal-thread-title">{selectedPost.thread_title}</h2>
-            <h3 className="news-modal-post-title">{selectedPost.post_title}</h3>
-            <p>{selectedPost.content}</p>
-          </div>
-        )}
+        <div
+          className={`news-modal ${showModal ? "show" : ""}`}
+          onClick={handleModalClick}
+        >
+          {selectedPost && (
+            <div className="news-modal-content">
+              <span className="close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <h2 className="news-modal-thread-title">
+                {selectedPost.thread_title}
+              </h2>
+              <h3 className="news-modal-post-title">
+                {selectedPost.post_title}
+              </h3>
+              <p>{selectedPost.content}</p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

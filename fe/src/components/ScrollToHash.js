@@ -16,10 +16,12 @@ function ScrollToHash() {
       setTimeout(() => {
         const element = document.querySelector(location.hash);
         if (element) {
-          element.scrollIntoView({
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - 60; // Trừ đi 60px
+
+          window.scrollTo({
+            top: offsetPosition,
             behavior: "smooth",
-            block: "start", // Cuộn để phần trên của element hiện ra
-            inline: "nearest",
           });
         }
       }, 100); // Thêm delay nhỏ để đảm bảo navigation hoàn tất

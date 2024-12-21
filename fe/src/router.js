@@ -25,6 +25,7 @@ import BookedFlights from "./components/BookedFlight";
 import FlightManagement from "./pages/admin/FlightManagement";
 import PlaneManagement from "./pages/admin/PlaneManagement";
 import Forum from "./pages/admin/NewsManagement";
+import Amthucthuonggia from "./pages/user/camnangbay/amthucthuonggia";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -99,6 +100,10 @@ const renderUserRouter = () => {
     {
       path: ROUTERS.USER.VEDADAT,
       component: <BookedFlights />,
+    },
+    {
+      path: ROUTERS.USER.AMTHUC,
+      component: <Amthucthuonggia/>,
     },
   ];
   return (
