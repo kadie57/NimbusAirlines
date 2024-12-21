@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../../components/Authentication"; // Adjust the import path as necessary
 
 const PlaneManagement = () => {
   // State for planes and form inputs
   const [planes, setPlanes] = useState([]);
   const [showAllPlanes, setShowAllPlanes] = useState(false);
+  const { getCredentials, userRole } = useAuth();
 
   // Add Plane Form State
   const [addPlaneForm, setAddPlaneForm] = useState({
@@ -51,6 +53,7 @@ const PlaneManagement = () => {
   // Add Plane Handler
   const handleAddPlane = async () => {
     try {
+      const credentials = getCredentials();
       const planeData = {
         flightnumber: addPlaneForm.flightNumber,
         manufacturer: addPlaneForm.manufacturer,
@@ -61,6 +64,8 @@ const PlaneManagement = () => {
         max_eco: parseInt(addPlaneForm.maxEco),
         max_bus: parseInt(addPlaneForm.maxBus),
         max_first: parseInt(addPlaneForm.maxFirst),
+        username: credentials.username,
+        password: credentials.password,
       };
 
       const response = await fetch("http://54.200.166.229/add_plane", {
@@ -98,6 +103,7 @@ const PlaneManagement = () => {
   // Update Plane Handler
   const handleUpdatePlane = async () => {
     try {
+      const credentials = getCredentials();
       const planeData = {
         manufacturer: updatePlaneForm.manufacturer,
         model: updatePlaneForm.model,
@@ -107,12 +113,13 @@ const PlaneManagement = () => {
         max_eco: parseInt(updatePlaneForm.maxEco),
         max_bus: parseInt(updatePlaneForm.maxBus),
         max_first: parseInt(updatePlaneForm.maxFirst),
+        username: credentials.username,
+        password: credentials.password,
       };
-
       const response = await fetch(
         `http://54.200.166.229/update_plane/${updatePlaneForm.flightNumber}`,
         {
-          method: "PUT",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(planeData),
         }
@@ -147,14 +154,16 @@ const PlaneManagement = () => {
   // Delete Plane Handler
   const handleDeletePlane = async () => {
     try {
+      const credentials = getCredentials();
       const response = await fetch("http://54.200.166.229/delete_plane", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           flightnumber: deletePlaneForm.flightNumber,
+          username: credentials.username,
+          password: credentials.password,
         }),
       });
-
       const result = await response.json();
 
       if (result.error) {
@@ -188,6 +197,11 @@ const PlaneManagement = () => {
     }));
   };
 
+  useEffect(() => {
+    if (userRole !== "admin") {
+      alert("Bạn không có quyền truy cập trang này");
+    }
+  }, [userRole]);
   // Fetch planes on component mount
   useEffect(() => {
     fetchPlanes();
@@ -465,6 +479,8 @@ const PlaneManagement = () => {
                 id="updateYear"
                 name="year"
                 value={updatePlaneForm.year}
+                onChange={handleUpdateInputChange}
+                placeholder="Nhập năm sản xuất"
               />
             </div>
             <div className="form-group">

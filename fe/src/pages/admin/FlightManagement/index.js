@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./FlightManage.css";
+import { useAuth } from "../../../components/Authentication"; // Điều chỉnh đường dẫn phù hợp
 
 const FlightManagement = () => {
+  const { getCredentials } = useAuth();
   // State for flights and form inputs
   const [flights, setFlights] = useState([]);
   const [error, setError] = useState(null);
   const [showAllFlights, setShowAllFlights] = useState(false);
   const [addFlightForm, setAddFlightForm] = useState({
-    adminname: "",
-    adminpass: "",
     flightNumber: "",
     departure: "",
     destination: "",
@@ -34,14 +34,10 @@ const FlightManagement = () => {
     distance: "",
     duration: "",
     status: "",
-    adminname: "",
-    adminpass: "",
   });
 
   const [deleteFlightForm, setDeleteFlightForm] = useState({
     flightNumber: "",
-    adminname: "",
-    adminpass: "",
   });
 
   // Fetch flights
@@ -63,6 +59,7 @@ const FlightManagement = () => {
   // Add flight handler
   const handleAddFlight = async () => {
     try {
+      const credentials = getCredentials();
       const flightData = {
         flightnumber: addFlightForm.flightNumber,
         departure: addFlightForm.departure,
@@ -75,6 +72,8 @@ const FlightManagement = () => {
         distance: parseFloat(addFlightForm.distance),
         duration: addFlightForm.duration,
         status: addFlightForm.status,
+        username: credentials.username,
+        password: credentials.password,
       };
 
       const response = await fetch("http://54.200.166.229/add_flight", {
@@ -89,7 +88,6 @@ const FlightManagement = () => {
         alert(result.error);
       } else {
         alert(result.message || "Flight added successfully");
-        // Reset form
         setAddFlightForm({
           flightNumber: "",
           departure: "",
@@ -102,7 +100,6 @@ const FlightManagement = () => {
           distance: "",
           duration: "",
           status: "",
-          
         });
         fetchFlights();
       }
@@ -115,7 +112,9 @@ const FlightManagement = () => {
   // Modify flight handler
   const handleModifyFlight = async () => {
     try {
+      const credentials = getCredentials();
       const flightData = {
+        flightnumber: modifyFlightForm.flightNumber,
         departure: modifyFlightForm.departure,
         destination: modifyFlightForm.destination,
         departuredate: modifyFlightForm.departureDate,
@@ -126,12 +125,14 @@ const FlightManagement = () => {
         distance: parseFloat(modifyFlightForm.distance),
         duration: modifyFlightForm.duration,
         status: modifyFlightForm.status,
+        username: credentials.username,
+        password: credentials.password,
       };
 
       const response = await fetch(
         `http://54.200.166.229/modify_flight/${modifyFlightForm.flightNumber}`,
         {
-          method: "PUT",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(flightData),
         }
@@ -143,7 +144,6 @@ const FlightManagement = () => {
         alert(result.error);
       } else {
         alert(result.message || "Flight modified successfully");
-        // Reset form
         setModifyFlightForm({
           flightNumber: "",
           departure: "",
@@ -168,11 +168,14 @@ const FlightManagement = () => {
   // Delete flight handler
   const handleDeleteFlight = async () => {
     try {
+      const credentials = getCredentials();
       const response = await fetch("http://54.200.166.229/delete_flight", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           flightnumber: deleteFlightForm.flightNumber,
+          username: credentials.username,
+          password: credentials.password,
         }),
       });
 
@@ -182,7 +185,6 @@ const FlightManagement = () => {
         alert(result.error);
       } else {
         alert(result.message || "Flight deleted successfully");
-        // Reset form
         setDeleteFlightForm({ flightNumber: "" });
         fetchFlights();
       }
@@ -192,13 +194,15 @@ const FlightManagement = () => {
     }
   };
 
-  // Fetch flights on component mount
+  // Rest of your component remains the same...
   useEffect(() => {
     fetchFlights();
   }, []);
+
   const toggleShowAllFlights = () => {
     setShowAllFlights(!showAllFlights);
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddFlightForm((prevState) => ({
@@ -206,6 +210,7 @@ const FlightManagement = () => {
       [name]: value,
     }));
   };
+
   const handleModifyInputChange = (e) => {
     const { name, value } = e.target;
     setModifyFlightForm((prevState) => ({
