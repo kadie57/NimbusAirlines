@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../components/Authentication";
 
 function BookingModal({ isOpen, onClose, flight, onSubmit }) {
-  const [username, setUsername] = useState("");
+  const { isLoggedIn, userInfo } = useAuth(); // Sửa lại để lấy đúng các giá trị từ context
   const [ticketClass, setTicketClass] = useState("Phổ thông");
   const [passengerCounts, setPassengerCounts] = useState({
     childUnder3: 0,
@@ -91,6 +92,11 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isLoggedIn) {
+      alert("Vui lòng đăng nhập để đặt vé");
+      return;
+    }
+
     // Validate at least one passenger is selected
     if (
       passengerCounts.childUnder3 +
@@ -99,6 +105,14 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
       0
     ) {
       alert("Vui lòng chọn ít nhất một hành khách");
+      return;
+    }
+
+    const token = localStorage.getItem("authToken");
+    const password = localStorage.getItem("password");
+
+    if (!token || !password) {
+      alert("Không tìm thấy thông tin đăng nhập. Vui lòng đăng nhập lại.");
       return;
     }
 
@@ -113,38 +127,48 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
 
     for (const { type, id } of passengerTypes) {
       if (passengerCounts[type] > 0) {
-        bookingPromises.push(
-          fetch("http://54.200.166.229/book", {
+        const bookingData = {
+          username: userInfo,
+          password: password,
+          flightnumber: flight.flightNumber,
+          ticket_type_id: id,
+          seat_class_id: ticketClassMap[ticketClass],
+          numberoftickets: passengerCounts[type],
+        };
+
+        try {
+          const response = await fetch("http://54.200.166.229/book", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({
-              username,
-              flightnumber: flight.flightNumber,
-              ticket_type_id: id,
-              seat_class_id: ticketClassMap[ticketClass],
-              numberoftickets: passengerCounts[type],
-            }),
-          })
-        );
+            body: JSON.stringify(bookingData),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || "Đặt vé thất bại");
+          }
+
+          if (!result.message) {
+            throw new Error("Đặt vé thất bại");
+          }
+        } catch (error) {
+          console.error(`Booking error for ${type}:`, error);
+          alert(
+            `Lỗi khi đặt vé cho ${passengerTypeMap[type].label}: ${error.message}`
+          );
+          return;
+        }
       }
     }
 
+    // If all bookings are successful
     try {
-      const responses = await Promise.all(bookingPromises);
-      const results = await Promise.all(responses.map((res) => res.json()));
-
-      // Check for any errors
-      const errorResponse = results.find((result) => !result.message);
-      if (errorResponse) {
-        alert(errorResponse.error || "Đặt vé thất bại");
-        return;
-      }
-
-      // Prepare booking info to pass back to parent component
       const bookingInfo = {
-        username,
+        username: userInfo,
         flightNumber: flight.flightNumber,
         passengerTypes: {
           childUnder3: {
@@ -165,14 +189,30 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
       };
 
       onSubmit(bookingInfo);
+      alert("Đặt vé thành công!");
       onClose();
     } catch (error) {
-      console.error("Booking error:", error);
-      alert("Có lỗi xảy ra khi đặt vé");
+      console.error("Error completing booking:", error);
+      alert("Có lỗi xảy ra khi hoàn tất đặt vé");
     }
   };
 
   if (!isOpen) return null;
+
+  // If user is not logged in, show message
+  if (!isLoggedIn) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Vui lòng đăng nhập</h2>
+          <p>Bạn cần đăng nhập để đặt vé</p>
+          <div className="modal-actions">
+            <button onClick={onClose}>Đóng</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="modal-overlay">
@@ -183,9 +223,9 @@ function BookingModal({ isOpen, onClose, flight, onSubmit }) {
             <label>Tên đăng nhập</label>
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              value={userInfo}
+              readOnly
+              className="input-readonly"
             />
           </div>
 

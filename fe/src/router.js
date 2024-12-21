@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./pages/user/homePage";
 import { ROUTERS } from "./utils/router";
 import MasterLayout from "./pages/user/theme/masterLayout";
@@ -21,11 +21,27 @@ import Profile from "./components/UserProfile";
 import Dashboard from "./pages/admin/Dashboard";
 
 import AdminLayout from "./pages/admin/theme/adminLayout"; // Add this line
+import { useAuth } from "./components/Authentication"; // Add this line
 import BookedFlights from "./components/BookedFlight";
 import FlightManagement from "./pages/admin/FlightManagement";
 import PlaneManagement from "./pages/admin/PlaneManagement";
 import Forum from "./pages/admin/NewsManagement";
 import Amthucthuonggia from "./pages/user/camnangbay/amthucthuonggia";
+import Tichluydam from "./pages/user/tichluydam";
+
+const AdminRoute = ({ children }) => {
+  const { isLoggedIn, userRole } = useAuth();
+
+  if (!isLoggedIn) {
+    return <Navigate to={`/${ROUTERS.USER.DANGNHAP}`} replace />;
+  }
+
+  if (userRole !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -103,7 +119,11 @@ const renderUserRouter = () => {
     },
     {
       path: ROUTERS.USER.AMTHUC,
-      component: <Amthucthuonggia/>,
+      component: <Amthucthuonggia />,
+    },
+    {
+      path: ROUTERS.USER.TICHLUYDAM,
+      component: <Tichluydam />,
     },
   ];
   return (
@@ -116,21 +136,6 @@ const renderUserRouter = () => {
     </MasterLayout>
   );
 };
-const RouterCustom = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/* Route user */}
-        <Route path="/*" element={renderUserRouter()} />
-
-        {/* Route admin */}
-        <Route path="/admin/*" element={renderAdminRouter()} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
-export default RouterCustom;
 
 // Import thêm các component admin khác
 
@@ -170,3 +175,17 @@ const renderAdminRouter = () => {
     </AdminLayout>
   );
 };
+const RouterCustom = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Route user */}
+        <Route path="/*" element={renderUserRouter()} />
+
+        {/* Route admin */}
+        <Route path="/admin/*" element={renderAdminRouter()} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+export default RouterCustom;

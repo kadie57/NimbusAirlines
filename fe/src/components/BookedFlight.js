@@ -62,7 +62,6 @@ function BookedFlights() {
           booking_id: booking.booking_id,
           username: username,
           flightnumber: booking.flightnumber,
-     
         }),
       });
 

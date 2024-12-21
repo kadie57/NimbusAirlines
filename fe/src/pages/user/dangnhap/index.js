@@ -8,16 +8,13 @@ const Dangnhap = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // State to manage form inputs
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
-  // State to manage login message
   const [message, setMessage] = useState("");
 
-  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -26,12 +23,41 @@ const Dangnhap = () => {
     }));
   };
 
-  // Handle form submission
+  const checkAdminAccount = async (username, password) => {
+    try {
+      const response = await fetch("http://54.200.166.229/admin_accounts", {
+        method: "GET",
+      });
+
+      if (response.ok) {
+        const adminAccounts = await response.json();
+        // Kiểm tra xem tài khoản có trong danh sách admin không
+        return adminAccounts.some(
+          (account) =>
+            account.username === username && account.password === password
+        );
+      }
+      return false;
+    } catch (error) {
+      console.error("Error checking admin account:", error);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://54.200.166.229/login", {
+      // Kiểm tra xem có phải tài khoản admin không
+      const isAdmin = await checkAdminAccount(
+        formData.username,
+        formData.password
+      );
+
+      // Endpoint đăng nhập tương ứng
+      const loginEndpoint = "http://54.200.166.229/login";
+
+      const response = await fetch(loginEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,11 +71,21 @@ const Dangnhap = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Sửa đổi ở đây: truyền username và token
-        login(formData.username, data.token);
+        // Lưu thông tin người dùng với role tương ứng
+        login(
+          formData.username,
+          data.token,
+          isAdmin ? "admin" : "user",
+          formData.password
+        );
         setMessage("Đăng nhập thành công");
-        // Chuyển hướng sau khi đăng nhập
-        navigate("/", { replace: true });
+
+        // Chuyển hướng dựa trên role
+        if (isAdmin) {
+          navigate("/admin", { replace: true });
+        } else {
+          navigate("/", { replace: true });
+        }
         window.location.reload();
       } else {
         setMessage(data.message || "Đăng nhập thất bại");

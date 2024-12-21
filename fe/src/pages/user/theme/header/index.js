@@ -62,7 +62,11 @@ const Header = () => {
                 <div class="sub-dropdown" style={{ top: "0px" }}>
                   <Link to="/noi-dia">Chuyến bay nội địa Việt Nam</Link>
                   <Link to="/nuoc-ngoai">Chuyến bay Việt Nam đi quốc tế</Link>
+                  <Link to="/am-thuc-thuong-gia">Ẩm thực hạng thương gia</Link>
                 </div>
+              </div>
+              <div class="has-sub-dropdown">
+                <Link to="/tich-luy-dam-bay">Tích lũy dặm bay</Link>
               </div>
             </div>
           </div>

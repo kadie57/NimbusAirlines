@@ -1,0 +1,188 @@
+/* Container cho nội dung */
+.amthuc-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.amthuc-content .TitlePage {
+  /* margin-bottom: 80px; */
+}
+/* Tiêu đề chính */
+.amthuc-content h1 {
+  /* color: #e53935; */
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 5px;
+}
+
+/* Tiêu đề phụ */
+.amthuc-content h2 {
+  color: #0277bd;
+  font-size: 2em;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Thêm icon cho tiêu đề */
+.amthuc-content h2 i {
+  margin-right: 10px;
+  color: #0277bd;
+}
+
+.amthuc-content .heading-strong {
+  font-weight: 700;
+  font-size: 28px;
+
+  margin-bottom: 15px;
+}
+
+/* Đoạn văn bản */
+.amthuc-content p {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Nhấn mạnh thông tin quan trọng */
+.amthuc-content strong {
+  /* color: #d32f2f; */
+  font-style: italic;
+}
+
+/* Khung ảnh món ăn */
+.amthuc-content .food-gallery {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.amthuc-content .food-item {
+  width: 30%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 10px;
+}
+
+.amthuc-content .food-item img {
+  width: 100%; /* Chiếm hết chiều rộng khung */
+  height: 100%; /* Chiếm hết chiều cao khung */
+  object-fit: cover; /* Đảm bảo ảnh vừa khung mà không bị méo */
+}
+
+.amthuc-content .food-item :hover {
+  transform: scale(1.15); /* Phóng to 15% */
+
+  background-color: rgba(76, 175, 80, 0.1); /* Nền xanh nhạt */
+  cursor: pointer; /* Con trỏ chỉ tay */
+}
+.amthuc-content .food-item .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* Phần khung chứa các nội dung */
+.amthuc-content .frame-3 {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e3f2fd;
+  border-radius: 8px;
+}
+
+/* Cải tiến phần khung container */
+.amthuc-content .frame-3 {
+  background-color: #e3f2fd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.amthuc-content .content {
+  flex: 1;
+  text-align: left;
+}
+
+.amthuc-content .image {
+  flex: 1;
+  text-align: right;
+}
+
+.amthuc-content .image img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.amthuc-content .btn {
+  /* background-color: #4caf50; Màu xanh lá cây */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/*special meal*/
+.amthuc-content .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amthuc-content .content {
+  flex: 1;
+  text-align: left;
+}
+
+.amthuc-content .btn {
+  /* background-color: #4caf50; Màu xanh lá cây */
+  color: #fff;
+  padding-left: 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/*noi dung ben duoi */
+.amthuc-content .frame-container {
+  display: flex; /* Sử dụng Flexbox để bố trí các phần tử ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: space-between; /* Giãn cách đều */
+  margin-bottom: 20px; /* Khoảng cách giữa các phần tử */
+  background-color: rgb(217, 240, 255);
+  border-radius: 10px;
+}
+
+.amthuc-content .frame-content {
+  flex: 1; /* Chữ chiếm 50% chiều rộng */
+  padding-left: 20px;
+  padding-right: 10px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333; /* Màu chữ */
+}
+
+.amthuc-content .frame-image {
+  flex: 1; /* Ảnh chiếm 50% chiều rộng */
+  padding: 0px;
+  margin: 0;
+}
+
+.amthuc-content .frame-image img {
+  width: 100%; /* Đảm bảo ảnh vừa với container */
+  height: 300px; /* Giữ tỷ lệ ảnh */
+  border-radius: 10px; /* Bo góc ảnh nếu cần */
+  padding: 0;
+  margin: 0;
+}

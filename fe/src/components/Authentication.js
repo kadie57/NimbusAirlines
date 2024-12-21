@@ -5,28 +5,37 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     const username = localStorage.getItem("username");
+    const role = localStorage.getItem("userRole");
     if (token && username) {
       setIsLoggedIn(true);
       setUserInfo(username);
+      setUserRole(role);
     }
   }, []);
 
-  const login = (username, token) => {
+  const login = (username, token, role, password) => {
     localStorage.setItem("authToken", token);
     localStorage.setItem("username", username);
+    localStorage.setItem("userRole", role);
+    localStorage.setItem("password", password);
     setIsLoggedIn(true);
     setUserInfo(username);
+    setUserRole(role);
   };
 
   const logout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("username");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("password");
     setIsLoggedIn(false);
     setUserInfo(null);
+    setUserRole(null);
   };
 
   return (
@@ -34,6 +43,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isLoggedIn,
         userInfo,
+        userRole,
         login,
         logout,
       }}

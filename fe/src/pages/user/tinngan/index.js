@@ -75,7 +75,9 @@ const TinNgan = () => {
               <h3 className="news-modal-post-title">
                 {selectedPost.post_title}
               </h3>
-              <p>{selectedPost.content}</p>
+              <div style={{ whiteSpace: "pre-wrap" }}>
+                {selectedPost.content}
+              </div>
             </div>
           )}
         </div>

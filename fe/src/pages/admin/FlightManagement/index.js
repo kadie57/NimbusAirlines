@@ -7,6 +7,8 @@ const FlightManagement = () => {
   const [error, setError] = useState(null);
   const [showAllFlights, setShowAllFlights] = useState(false);
   const [addFlightForm, setAddFlightForm] = useState({
+    adminname: "",
+    adminpass: "",
     flightNumber: "",
     departure: "",
     destination: "",
@@ -32,10 +34,14 @@ const FlightManagement = () => {
     distance: "",
     duration: "",
     status: "",
+    adminname: "",
+    adminpass: "",
   });
 
   const [deleteFlightForm, setDeleteFlightForm] = useState({
     flightNumber: "",
+    adminname: "",
+    adminpass: "",
   });
 
   // Fetch flights
@@ -96,6 +102,7 @@ const FlightManagement = () => {
           distance: "",
           duration: "",
           status: "",
+          
         });
         fetchFlights();
       }

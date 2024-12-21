@@ -8,9 +8,12 @@ const Dangky = () => {
 
   // State to manage form inputs
   const [formData, setFormData] = useState({
+    realname: "",
     username: "",
     email: "",
     password: "",
+    gender: "",
+    birthdate: "",
   });
 
   // State to manage form submission message
@@ -27,17 +30,19 @@ const Dangky = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     // Prepare data object
     const data = {
+      realname: formData.realname,
       username: formData.username,
       email: formData.email,
       password_hash: formData.password,
+      gender: formData.gender,
+      birthdate: formData.birthdate,
     };
 
     try {
-      // Send POST request to the backend
       const response = await fetch("http://54.200.166.229/accounts", {
         method: "POST",
         headers: {
@@ -46,23 +51,18 @@ const Dangky = () => {
         body: JSON.stringify(data),
       });
 
-      // Parse the response
       const responseData = await response.json();
 
-      // Handle response
       if (response.ok) {
-        // Đăng ký thành công
         setMessage({
           text: "Đăng ký thành công. Chuyển hướng đến trang đăng nhập...",
           color: "green",
         });
 
-        // Chuyển hướng đến trang đăng nhập sau 2 giây
         setTimeout(() => {
           navigate("/dang-nhap");
         }, 2000);
       } else {
-        // Đăng ký thất bại
         setMessage({
           text: responseData.error || "Đăng ký không thành công",
           color: "red",
@@ -83,6 +83,45 @@ const Dangky = () => {
       <div className="container-register">
         <h2>Tạo tài khoản</h2>
         <form className="register-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Họ và tên</label>
+            <input
+              type="text"
+              name="realname"
+              value={formData.realname}
+              onChange={handleInputChange}
+              required
+            />
+            <div
+              className="input-group"
+              style={{ display: "flex", marginTop: "20px" }}
+            >
+              <label style={{ marginRight: "20px", marginTop: "10px" }}>
+                Giới tính
+              </label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                required
+                style={{ padding: "0" }}
+              >
+                <option value="">Chọn giới tính</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <label>Ngày sinh</label>
+              <input
+                type="date"
+                name="birthdate"
+                value={formData.birthdate}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
           <div className="input-group">
             <label>Tên đăng nhập</label>
             <input
@@ -116,6 +155,7 @@ const Dangky = () => {
             />
             <i className="lock"></i>
           </div>
+
           <div className="checkbox-group">
             <input type="checkbox" required />
             <span>Tôi đồng ý với các điều khoản và dịch vụ</span>
